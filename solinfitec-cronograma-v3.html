@@ -243,6 +243,104 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;justify
 </style>
 </head>
 <body>
+  <div id="auth-container" style="display: flex; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #121214; z-index: 9999; justify-content: center; align-items: center; color: #fff; font-family: sans-serif;">
+    <div style="background: #202024; padding: 40px; border-radius: 8px; width: 100%; max-width: 400px; box-shadow: 0 8px 32px rgba(0,0,0,0.5); border: 1px solid #323238;">
+      <h2 id="auth-title" style="margin-bottom: 24px; text-align: center; color: #00b37e;">Acessar Cronograma</h2>
+      
+      <form id="auth-form" onsubmit="handleAuth(event)">
+        <div style="margin-bottom: 16px;">
+          <label style="display: block; margin-bottom: 8px; color: #c4c4cc;">E-mail / Usuário</label>
+          <input type="email" id="auth-email" required placeholder="seu@email.com" style="width: 100%; padding: 12px; background: #121214; border: 1px solid #323238; border-radius: 4px; color: #fff; box-sizing: border-box;">
+        </div>
+        
+        <div style="margin-bottom: 24px;">
+          <label style="display: block; margin-bottom: 8px; color: #c4c4cc;">Senha</label>
+          <input type="password" id="auth-password" required placeholder="••••••••" style="width: 100%; padding: 12px; background: #121214; border: 1px solid #323238; border-radius: 4px; color: #fff; box-sizing: border-box;">
+        </div>
+        
+        <button type="submit" id="auth-submit-btn" style="width: 100%; padding: 12px; background: #00b37e; border: none; border-radius: 4px; color: #fff; font-weight: bold; cursor: pointer; font-size: 16px;">Entrar</button>
+      </form>
+      
+      <div style="margin-top: 20px; text-align: center;">
+        <a href="#" id="auth-toggle-link" onclick="toggleAuthMode(event)" style="color: #8d8d99; text-decoration: none; font-size: 14px;">Não tem conta? Cadastre-se</a>
+      </div>
+      <p id="auth-error" style="color: #f75a68; text-align: center; margin-top: 15px; font-size: 14px; display: none;"></p>
+    </div>
+  </div>
+  
+  <script>
+    let authMode = 'login'; 
+  
+    document.addEventListener("DOMContentLoaded", () => {
+        const token = localStorage.getItem("cronograma-auth-token");
+        if (token) {
+            document.getElementById("auth-container").style.display = "none";
+        }
+    });
+  
+    function toggleAuthMode(e) {
+        e.preventDefault();
+        const title = document.getElementById("auth-title");
+        const btn = document.getElementById("auth-submit-btn");
+        const link = document.getElementById("auth-toggle-link");
+        document.getElementById("auth-error").style.display = "none";
+  
+        if (authMode === 'login') {
+            authMode = 'register';
+            title.innerText = "Criar Nova Conta";
+            btn.innerText = "Cadastrar";
+            link.innerText = "Já tem uma conta? Faça Login";
+        } else {
+            authMode = 'login';
+            title.innerText = "Acessar Cronograma";
+            btn.innerText = "Entrar";
+            link.innerText = "Não tem conta? Cadastre-se";
+        }
+    }
+  
+    async function handleAuth(e) {
+        e.preventDefault();
+        const email = document.getElementById("auth-email").value;
+        const password = document.getElementById("auth-password").value;
+        const errorMsg = document.getElementById("auth-error");
+        errorMsg.style.display = "none";
+  
+        const base = window.CRONOGRAMA_API_BASE_URL || "https://solinfitecskill-backend.onrender.com";
+        const endpoint = authMode === 'login' ? "/api/auth/login" : "/api/auth/register";
+  
+        try {
+            const response = await fetch(`${base}${endpoint}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password })
+            });
+  
+            const data = await response.json();
+  
+            if (!response.ok) {
+                throw new Error(data.message || "Erro ao processar autenticação.");
+            }
+  
+            if (authMode === 'register') {
+                alert("Cadastro realizado com sucesso! Agora faça o seu login.");
+                authMode = 'register';
+                toggleAuthMode(e);
+                return;
+            }
+  
+            if (data.token) {
+                localStorage.setItem("cronograma-auth-token", data.token);
+                document.getElementById("auth-container").style.display = "none";
+                window.location.reload(); 
+            }
+  
+        } catch (error) {
+            errorMsg.innerText = error.message;
+            errorMsg.style.display = "block";
+        }
+    }
+  </script>
+
 
 <header class="header">
   <div class="header-left">
@@ -1695,7 +1793,7 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;justify
 </footer>
 
 <script>
-  window.CRONOGRAMA_API_BASE_URL = "https://solinfitecskill.onrender.com";
+  window.CRONOGRAMA_API_BASE_URL = "https://solinfitecskill-backend.onrender.com";
 </script>
 <script src="./assets/js/app.js" defer></script>
 <script type="application/json">

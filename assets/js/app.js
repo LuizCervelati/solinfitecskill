@@ -103,14 +103,8 @@ function apiBaseUrl(){
   return String(window.CRONOGRAMA_API_BASE_URL || "").trim().replace(/\/+$/,"");
 }
 
-function getClientUserId(){
-  const k = "cronograma-user-id";
-  let id = localStorage.getItem(k);
-  if(!id){
-    id = `guest-${Math.random().toString(36).slice(2,10)}`;
-    localStorage.setItem(k, id);
-  }
-  return id;
+function getAuthToken(){
+  return String(localStorage.getItem("cronograma-auth-token") || "").trim();
 }
 
 function applyChecklistState(state){
@@ -125,10 +119,13 @@ function applyChecklistState(state){
 
 async function loadChecklistFromApi(){
   const base = apiBaseUrl();
+  const token = getAuthToken();
+  if(!token) return;
   if(!base) return;
   try{
-    const userId = getClientUserId();
-    const res = await fetch(`${base}/api/checklist-state/${encodeURIComponent(userId)}`);
+    const res = await fetch(`${base}/api/checklist-state`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     if(!res.ok) return;
     const data = await res.json();
     if(data && data.state && typeof data.state === "object"){
@@ -140,14 +137,18 @@ async function loadChecklistFromApi(){
 let checklistSyncTimer = null;
 function scheduleChecklistSync(state){
   const base = apiBaseUrl();
+  const token = getAuthToken();
+  if(!token) return;
   if(!base) return;
   if(checklistSyncTimer) clearTimeout(checklistSyncTimer);
   checklistSyncTimer = setTimeout(async () => {
     try{
-      const userId = getClientUserId();
-      await fetch(`${base}/api/checklist-state/${encodeURIComponent(userId)}`,{
+      await fetch(`${base}/api/checklist-state`,{
         method: "PUT",
-        headers: {"Content-Type":"application/json"},
+        headers: {
+          "Content-Type":"application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({ state }),
       });
     }catch(_err){}

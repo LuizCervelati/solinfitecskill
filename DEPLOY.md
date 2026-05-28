@@ -30,6 +30,7 @@ git push -u origin main
 4. Preencha variaveis:
    - `NODE_ENV=production`
    - `RATE_LIMIT_MAX=300`
+   - `JWT_SECRET` (minimo 32 caracteres)
    - `SUPABASE_URL`
    - `SUPABASE_SERVICE_ROLE_KEY`
    - `CORS_ORIGIN` (exemplo: `https://SEU_USUARIO.github.io`)
@@ -39,9 +40,14 @@ Quando subir, copie a URL da API:
 
 `https://cronograma-backend.onrender.com`
 
-## 3) Criar tabelas no Supabase
+## 3) Criar/atualizar tabelas no Supabase
 
 No SQL Editor, rode `backend/supabase-schema.sql`.
+
+Observacao:
+- Se voce tinha schema antigo, o script salva backups em:
+  - `study_notes_legacy_backup`
+  - `checklist_state_legacy_backup`
 
 ## 4) Apontar frontend para API
 
@@ -75,6 +81,8 @@ URL esperada:
 ## 6) Validar
 
 - Abra `https://SUA-API.onrender.com/api/health` (deve retornar `ok: true`).
+- Teste `POST /api/auth/register` e `POST /api/auth/login`.
+- Use o token JWT em `Authorization: Bearer <token>`.
 - Abra o Pages e marque checklist.
 - Recarregue a pagina para confirmar persistencia.
 - Teste de CORS: tente chamar API a partir de origem nao autorizada (deve falhar).
