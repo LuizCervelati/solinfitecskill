@@ -96,6 +96,29 @@ function requireAuth(req, res, next) {
   }
 }
 
+function requireAdmin(req, res, next) {
+  if (req.user?.role !== "admin") {
+    return res.status(403).json({ error: "apenas administradores podem editar o conteudo" });
+  }
+  return next();
+}
+
+const curriculumSlugs = new Set(["proj1", "proj2", "proj3"]);
+
+function validateCurriculumContent(content) {
+  if (!content || typeof content !== "object" || Array.isArray(content)) return false;
+  if (!Array.isArray(content.steps)) return false;
+  if (content.steps.length > 40) return false;
+  const size = JSON.stringify(content).length;
+  if (size > 800000) return false;
+  return content.steps.every((step) => {
+    if (!step || typeof step !== "object") return false;
+    if (typeof step.title !== "string" || step.title.length > 200) return false;
+    if (!Array.isArray(step.blocks)) return false;
+    return step.blocks.length <= 30;
+  });
+}
+
 app.get("/api/health", (_req, res) => {
   res.json({ ok: true, service: "cronograma-backend" });
 });
@@ -275,6 +298,56 @@ app.put("/api/checklist-state", requireAuth, async (req, res) => {
     .single();
 
   if (error) return res.status(500).json({ error: "erro ao salvar checklist" });
+  return res.json(data);
+});
+
+app.get("/api/curriculum", requireAuth, async (_req, res) => {
+  const { data, error } = await supabase
+    .from("project_curriculum")
+    .select("slug,content,updated_at")
+    .in("slug", ["proj1", "proj2", "proj3"]);
+  if (error) return res.status(500).json({ error: "erro ao listar curriculum" });
+  return res.json(data || []);
+});
+
+app.get("/api/curriculum/:slug", requireAuth, async (req, res) => {
+  const slug = sanitizeText(req.params.slug, 40).toLowerCase();
+  if (!curriculumSlugs.has(slug)) return res.status(400).json({ error: "projeto invalido" });
+
+  const { data, error } = await supabase
+    .from("project_curriculum")
+    .select("slug,content,updated_at")
+    .eq("slug", slug)
+    .maybeSingle();
+  if (error) return res.status(500).json({ error: "erro ao buscar curriculum" });
+  if (!data) return res.json({ slug, content: null, updated_at: null });
+  return res.json(data);
+});
+
+app.put("/api/curriculum/:slug", requireAuth, async (req, res) => {
+  const slug = sanitizeText(req.params.slug, 40).toLowerCase();
+  if (!curriculumSlugs.has(slug)) return res.status(400).json({ error: "projeto invalido" });
+
+  const content = req.body?.content;
+  if (!validateCurriculumContent(content)) {
+    return res.status(400).json({ error: "conteudo invalido" });
+  }
+
+  const { data, error } = await supabase
+    .from("project_curriculum")
+    .upsert(
+      {
+        slug,
+        content,
+        updated_by: req.user.sub,
+        updated_at: new Date().toISOString(),
+      },
+      { onConflict: "slug" }
+    )
+    .select("slug,content,updated_at")
+    .single();
+
+  if (error) return res.status(500).json({ error: "erro ao salvar curriculum" });
   return res.json(data);
 });
 

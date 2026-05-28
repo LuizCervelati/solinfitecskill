@@ -280,9 +280,31 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;justify
         <span id="project-type-status" class="auth-status-inline"></span>
       </div>
     </div>
+    <div id="curriculum-toolbar" class="curriculum-toolbar" style="display:none">
+      <div class="auth-title">Editar cronograma (tópicos, subtópicos e diagramas)</div>
+      <div class="curriculum-toolbar-actions">
+        <button type="button" class="anki-btn-muted" data-action="curriculum-edit-toggle">Editar conteúdo</button>
+        <button type="button" class="anki-btn-primary" data-action="curriculum-save-all">Salvar na nuvem</button>
+        <button type="button" class="anki-btn-muted" data-action="curriculum-import">Importar desta página</button>
+      </div>
+      <p class="curriculum-hint">No modo edição: clique nos textos para alterar. Use «Editar arquitetura/classes/banco» nos diagramas. «Importar» envia o HTML atual para a API (primeira vez).</p>
+      <span id="curriculum-status" class="auth-status-inline"></span>
+    </div>
   </div>
   <div id="auth-status" class="auth-status"></div>
 </section>
+
+<div id="curriculum-diagram-modal" class="curriculum-modal" style="display:none">
+  <div class="curriculum-modal-card">
+    <h3 class="curriculum-modal-title">Editar diagrama (JSON)</h3>
+    <textarea id="curriculum-diagram-json" class="anki-textarea curriculum-modal-json"></textarea>
+    <div class="curriculum-modal-actions">
+      <button type="button" class="anki-btn-primary" data-action="curriculum-diagram-apply">Aplicar</button>
+      <button type="button" class="anki-btn-muted" data-action="curriculum-diagram-close">Cancelar</button>
+    </div>
+  </div>
+</div>
+
 <main id="conteudo-principal">
 
 <section class="overview">
@@ -1716,6 +1738,7 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;justify
 </footer>
 
 <script src="./assets/js/config.js"></script>
+<script src="./assets/js/curriculum.js" defer></script>
 <script src="./assets/js/app.js" defer></script>
 <script type="application/json">
 function toggle(el){

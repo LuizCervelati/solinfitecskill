@@ -42,6 +42,26 @@ h1 span{color:var(--green)}
 .auth-status{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--green);opacity:0;transition:opacity .2s}
 .auth-status-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted)}
 
+/* CURRICULUM EDITOR */
+.curriculum-toolbar{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.curriculum-toolbar-actions{display:flex;flex-wrap:wrap;gap:8px}
+.curriculum-hint{font-size:12px;color:var(--muted);line-height:1.5;margin:0}
+.curriculum-add-btn{margin-top:6px;font-family:'IBM Plex Mono',monospace;font-size:10px;padding:4px 10px;border-radius:4px;border:1px dashed var(--border2);background:transparent;color:var(--green);cursor:pointer}
+.curriculum-edit-diagram-btn{margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:10px;padding:6px 12px;border-radius:4px;border:1px solid var(--border2);background:var(--surface2);color:var(--blue);cursor:pointer}
+.curriculum-modal{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px}
+.curriculum-modal-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;width:min(720px,100%);max-height:90vh;display:flex;flex-direction:column;gap:12px}
+.curriculum-modal-title{font-size:16px;font-weight:700;color:var(--green)}
+.curriculum-modal-json{min-height:320px;font-family:'IBM Plex Mono',monospace;font-size:11px}
+.curriculum-modal-actions{display:flex;gap:8px}
+body.curriculum-editing .step-title,
+body.curriculum-editing .step-duration,
+body.curriculum-editing .sub-label,
+body.curriculum-editing .checklist li,
+body.curriculum-editing .diagram-title,
+body.curriculum-editing .proj-title,
+body.curriculum-editing .proj-desc{outline:1px dashed var(--green-mid);outline-offset:2px;border-radius:2px}
+body.curriculum-editing .checklist li{cursor:text}
+
 /* AUTH PAGES */
 .auth-page-body{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
 .auth-page{width:100%;max-width:420px}

@@ -92,6 +92,16 @@ create table if not exists public.checklist_state (
   constraint chk_checklist_state_type check (jsonb_typeof(state) = 'object')
 );
 
+create table if not exists public.project_curriculum (
+  slug text primary key references public.project_types(slug) on delete cascade,
+  content jsonb not null default '{}'::jsonb,
+  updated_by uuid references public.auth_users(id) on delete set null,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  constraint chk_project_curriculum_slug check (slug in ('proj1','proj2','proj3')),
+  constraint chk_project_curriculum_content_type check (jsonb_typeof(content) = 'object')
+);
+
 create index if not exists idx_study_notes_user_project_created_at
   on public.study_notes (user_id, projeto_slug, created_at desc);
 create index if not exists idx_project_types_ativo_nome
@@ -101,6 +111,7 @@ alter table public.auth_users enable row level security;
 alter table public.project_types enable row level security;
 alter table public.study_notes enable row level security;
 alter table public.checklist_state enable row level security;
+alter table public.project_curriculum enable row level security;
 
 drop policy if exists deny_all_auth_users on public.auth_users;
 create policy deny_all_auth_users
@@ -120,4 +131,9 @@ using (false) with check (false);
 drop policy if exists deny_all_checklist_state on public.checklist_state;
 create policy deny_all_checklist_state
 on public.checklist_state for all
+using (false) with check (false);
+
+drop policy if exists deny_all_project_curriculum on public.project_curriculum;
+create policy deny_all_project_curriculum
+on public.project_curriculum for all
 using (false) with check (false);

@@ -160,6 +160,9 @@ async function initAuthUI(){
     currentUser = await res.json();
     setAuthUIState(true);
     await loadProjectTypes();
+    if(typeof initCurriculumEditor === "function"){
+      await initCurriculumEditor(currentUser);
+    }
   }catch(_err){
     clearAuthToken();
     window.location.href = "login.html";
