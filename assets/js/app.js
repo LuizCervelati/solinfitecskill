@@ -1,3 +1,4 @@
+window.CRONOGRAMA_API_BASE_URL = "https://solinfitecskill.onrender.com";
 function toggle(el){
   el.classList.toggle('open');
   updateAllProgress();
@@ -407,4 +408,9 @@ function initAnki(){
   if(!akLoad(AK.fc).length){ akSave(AK.fc, fcDefaults); }
 
   renderNotas(); renderDv(); renderGls(); initDeck();
+}
+
+function handleLogout() {
+  localStorage.removeItem("cronograma-auth-token");
+  window.location.reload();
 }
