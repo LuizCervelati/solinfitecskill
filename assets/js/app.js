@@ -49,6 +49,19 @@ window.addEventListener('DOMContentLoaded',()=>{
   initAnki();
   loadChecklistFromApi();
 });
+function bindUIEvents() {
+  // 1. Captura o clique no link "Cadastre-se" / "Voltar para o Login" de forma nativa
+  document.addEventListener('click', (event) => {
+      const toggleLink = event.target.closest('#auth-toggle-link');
+      if (toggleLink) {
+          event.preventDefault();
+          toggleAuthMode(); // Chama a função que altera a tela
+          return;
+      }
+  });
+
+  // ... o restante do seu código original da função bindUIEvents continua aqui para baixo ...
+}
 
 function bindUIEvents(){
   document.addEventListener('click', (event) => {
@@ -322,6 +335,37 @@ function saveDv(){
   document.getElementById('dv-body').value='';
   renderDv();
 }
+
+function toggleAuthMode() {
+  const container = document.getElementById('auth-container'); 
+  const title = document.querySelector('#auth-card h2') || document.querySelector('.login-container h2') || document.querySelector('h2');
+  const submitBtn = document.querySelector('.btn-submit') || document.querySelector('button[type="submit"]') || document.querySelector('.btn');
+  const toggleLink = document.getElementById('auth-toggle-link');
+  const nameField = document.getElementById('name-field-container'); 
+
+  const isLogin = submitBtn.textContent.trim().toLowerCase() === 'entrar';
+
+  if (isLogin) {
+      if(title) title.textContent = 'Criar Conta';
+      if(submitBtn) submitBtn.textContent = 'Cadastrar';
+      if(toggleLink) toggleLink.innerHTML = 'Já tem conta? Faça Login';
+      if(nameField) nameField.style.display = 'block'; 
+  } else {
+      if(title) title.textContent = 'Acessar Cronograma';
+      if(submitBtn) submitBtn.textContent = 'Entrar';
+      if(toggleLink) toggleLink.innerHTML = 'Não tem conta? Cadastre-se';
+      if(nameField) nameField.style.display = 'none'; 
+  }
+}
+
+// COLE ESSE BLOCO EXATAMENTE AQUI (LOGO ABAIXO DA FUNÇÃO):
+document.addEventListener('click', (event) => {
+  const toggleLink = event.target.closest('#auth-toggle-link');
+  if (toggleLink) {
+      event.preventDefault();
+      toggleAuthMode(); // Agora sim o clique vai disparar a função!
+  }
+});
 
 function toggleDv(id){
   const items = akLoad(AK.dv).map(i=>i.id===id?{...i,resolved:!i.resolved}:i);
