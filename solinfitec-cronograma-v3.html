@@ -1,0 +1,2005 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cronograma Solinfitec</title>
+<meta name="description" content="Cronograma de estudos Solinfitec com trilha prática de 3 projetos e caderno de revisão.">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/css/styles.css">
+<style media="not all">
+:root {
+  --bg:#0a0a0f;--surface:#111118;--surface2:#18181f;--border:#2a2a35;--border2:#3a3a48;
+  --text:#e8e8f0;--muted:#7070a0;
+  --green:#00e5a0;--green-dim:#00e5a018;--green-mid:#00e5a050;
+  --blue:#4da6ff;--blue-dim:#4da6ff18;--blue-mid:#4da6ff50;
+  --amber:#ffb84d;--amber-dim:#ffb84d18;--amber-mid:#ffb84d50;
+  --red:#ff6b6b;--red-dim:#ff6b6b15;
+  --p1:var(--green);--p2:var(--blue);--p3:var(--amber);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5}
+
+/* HEADER */
+.header{position:relative;padding:56px 48px 44px;border-bottom:1px solid var(--border);display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.header-left{flex:1;min-width:280px}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.eyebrow::before{content:'';display:inline-block;width:24px;height:1px;background:var(--muted)}
+h1{font-size:clamp(26px,4vw,42px);font-weight:800;line-height:1.1;letter-spacing:-1px}
+h1 span{color:var(--green)}
+.header-meta{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);line-height:2;text-align:right}
+
+/* NAV */
+.nav{display:flex;gap:8px;padding:18px 48px;border-bottom:1px solid var(--border);flex-wrap:wrap;position:sticky;top:0;background:var(--bg);z-index:100}
+.nav-pill{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;padding:6px 14px;border-radius:100px;border:1px solid var(--border2);color:var(--muted);background:transparent;cursor:pointer;transition:all .2s;text-decoration:none;letter-spacing:.5px}
+.nav-pill:hover{color:var(--text);border-color:var(--text)}
+.nav-pill.p1{color:var(--p1);border-color:var(--green-mid);background:var(--green-dim)}
+.nav-pill.p2{color:var(--p2);border-color:var(--blue-mid);background:var(--blue-dim)}
+.nav-pill.p3{color:var(--p3);border-color:var(--amber-mid);background:var(--amber-dim)}
+
+/* OVERVIEW */
+.overview{padding:48px 48px 32px}
+.section-title{font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:20px}
+.timeline-bar{display:grid;grid-template-columns:5fr 4fr 5fr;gap:2px;border-radius:6px;overflow:hidden;margin-bottom:10px}
+.tbar-seg{height:7px}
+.tbar-seg.p1{background:var(--p1)}.tbar-seg.p2{background:var(--p2)}.tbar-seg.p3{background:var(--p3)}
+.timeline-labels{display:grid;grid-template-columns:5fr 4fr 5fr;gap:2px;margin-bottom:32px}
+.tl-label{font-family:'IBM Plex Mono',monospace;font-size:10px;text-align:center;padding:4px 0;color:var(--muted)}
+.stats{display:flex;gap:2px;margin-bottom:48px;flex-wrap:wrap}
+.stat{flex:1;min-width:100px;padding:18px 20px;background:var(--surface);border:1px solid var(--border);border-radius:4px}
+.stat-val{font-family:'IBM Plex Mono',monospace;font-size:26px;font-weight:600;line-height:1;margin-bottom:4px}
+.stat-lbl{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.stat.green .stat-val{color:var(--green)}.stat.blue .stat-val{color:var(--blue)}.stat.amber .stat-val{color:var(--amber)}.stat.white .stat-val{color:var(--text)}
+
+/* PROJECT SECTION */
+.project-section{padding:0 48px 80px}
+.project-header{display:flex;align-items:flex-start;gap:24px;padding:40px 0 28px;border-top:1px solid var(--border)}
+.proj-number{font-family:'IBM Plex Mono',monospace;font-size:68px;font-weight:600;line-height:.9;opacity:.07;flex-shrink:0;width:96px;text-align:right}
+.p1-color{color:var(--p1)}.p2-color{color:var(--p2)}.p3-color{color:var(--p3)}
+.proj-meta{flex:1}
+.proj-badge{display:inline-flex;align-items:center;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:100px;margin-bottom:12px}
+.proj-badge::before{content:'●';font-size:7px}
+.proj-badge.p1{background:var(--green-dim);color:var(--p1);border:1px solid var(--green-mid)}
+.proj-badge.p2{background:var(--blue-dim);color:var(--p2);border:1px solid var(--blue-mid)}
+.proj-badge.p3{background:var(--amber-dim);color:var(--p3);border:1px solid var(--amber-mid)}
+.proj-title{font-size:clamp(18px,2.5vw,28px);font-weight:700;margin-bottom:8px;letter-spacing:-.5px}
+.proj-desc{font-size:13px;color:var(--muted);line-height:1.6;max-width:580px}
+.proj-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.tag{font-family:'IBM Plex Mono',monospace;font-size:10px;padding:3px 10px;border:1px solid var(--border2);border-radius:4px;color:var(--muted)}
+
+/* PROGRESS */
+.progress-wrap{margin-bottom:28px}
+.progress-row{display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:5px}
+.progress-bar-bg{height:3px;background:var(--border);border-radius:2px;overflow:hidden}
+.progress-bar-fill{height:100%;border-radius:2px;transition:width .4s ease}
+
+/* STEPS */
+.steps{display:flex;flex-direction:column;gap:0;position:relative;padding-left:36px}
+.steps::before{content:'';position:absolute;left:11px;top:24px;bottom:24px;width:1px;background:var(--border)}
+.step{position:relative;cursor:pointer}
+.step-dot{position:absolute;left:-36px;top:16px;width:13px;height:13px;border-radius:50%;border:2px solid var(--border2);background:var(--bg);z-index:1;transition:all .2s}
+.step:hover .step-dot{border-color:currentColor}
+.step-inner{border:1px solid var(--border);border-radius:8px;background:var(--surface);margin-bottom:8px;overflow:hidden;transition:border-color .2s}
+.step:hover .step-inner{border-color:var(--border2)}
+.step-head{display:flex;align-items:center;gap:12px;padding:15px 20px;user-select:none}
+.step-num{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;min-width:28px;opacity:.45}
+.step-title{flex:1;font-size:14px;font-weight:600}
+.step-duration{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);background:var(--surface2);padding:2px 8px;border-radius:4px;white-space:nowrap}
+.step-arrow{font-size:12px;color:var(--muted);transition:transform .25s;margin-left:4px}
+.step.open .step-arrow{transform:rotate(90deg)}
+.step-body{display:none;padding:0 20px 20px;border-top:1px solid var(--border)}
+.step.open .step-body{display:block}
+
+/* STEP BODY GRID */
+.sbg{padding-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:680px){
+  .sbg{grid-template-columns:1fr}
+  .header,.nav,.overview,.project-section{padding-left:20px;padding-right:20px}
+  .proj-number{font-size:40px;width:56px}
+}
+.sub-label{font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.sub-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.checklist{list-style:none;display:flex;flex-direction:column;gap:5px}
+.checklist li{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--muted);line-height:1.45;cursor:pointer;padding:4px 6px;border-radius:4px;transition:background .15s}
+.checklist li:hover{background:var(--surface2)}
+.checklist li.done{text-decoration:line-through;opacity:.4}
+.check-box{width:14px;height:14px;border:1px solid var(--border2);border-radius:3px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:9px;transition:all .15s}
+.checklist li.done .check-box{background:var(--green);border-color:var(--green);color:#000}
+
+/* TOOLS */
+.tools-list{display:flex;flex-direction:column;gap:6px}
+.tool-item{display:flex;align-items:center;gap:10px;padding:7px 10px;background:var(--surface2);border:1px solid var(--border);border-radius:6px}
+.tool-icon{width:24px;height:24px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0;font-family:'IBM Plex Mono',monospace}
+.tool-name{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;color:var(--text)}
+.tool-use{font-size:11px;color:var(--muted)}
+
+/* DELIVERABLE */
+.deliverable{grid-column:1/-1;padding:12px 14px;border-radius:6px;border-left:3px solid;background:var(--surface2);font-size:13px;color:var(--muted);line-height:1.5}
+.deliverable strong{display:block;font-size:10px;font-family:'IBM Plex Mono',monospace;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;font-weight:600}
+
+/* ARCH FLOW */
+.arch-flow{grid-column:1/-1;display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+.arch-node{font-family:'IBM Plex Mono',monospace;font-size:10px;padding:4px 10px;border-radius:4px;border:1px solid;font-weight:500}
+.arch-arr{color:var(--muted);font-size:11px}
+
+/* FOLDER TREE */
+.folder-tree-wrap{grid-column:1/-1}
+.folder-tree{font-family:'IBM Plex Mono',monospace;font-size:11px;line-height:1.9;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:14px 16px;overflow-x:auto}
+.ft-dir{color:var(--text);font-weight:500}
+.ft-file{color:var(--muted)}
+.ft-ann{color:var(--green);font-size:10px;opacity:.8}
+.ft-ann2{color:var(--blue);font-size:10px;opacity:.8}
+.ft-ann3{color:var(--amber);font-size:10px;opacity:.8}
+.ft-title{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:10px;font-family:'IBM Plex Mono',monospace}
+
+/* ── ARCHITECTURE DIAGRAM ── */
+.arch-section{grid-column:1/-1;margin-top:4px}
+.arch-diagram{display:flex;align-items:center;gap:0;overflow-x:auto;padding:16px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;flex-wrap:nowrap}
+.arch-node-box{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:80px;flex-shrink:0}
+.arch-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;border:1px solid}
+.arch-label{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--muted);text-align:center;line-height:1.3;max-width:80px}
+.arch-sublabel{font-size:9px;color:var(--muted);opacity:.6;font-family:'IBM Plex Mono',monospace;text-align:center}
+.arch-arrow{display:flex;flex-direction:column;align-items:center;gap:2px;flex-shrink:0;padding:0 4px}
+.arch-arrow-line{height:2px;width:28px;background:var(--border2);position:relative}
+.arch-arrow-line::after{content:'▶';position:absolute;right:-6px;top:-6px;font-size:9px;color:var(--border2)}
+.arch-arrow-label{font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--muted);white-space:nowrap}
+
+/* ── CLASS DIAGRAM ── */
+.class-diagram{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:12px;padding:16px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;align-items:flex-start}
+.class-box{background:var(--bg);border:1px solid var(--border2);border-radius:6px;min-width:160px;flex:1;overflow:hidden}
+.class-box-header{padding:7px 12px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--border)}
+.class-box-header .stereotype{font-size:8px;font-weight:400;opacity:.6}
+.class-box-fields{padding:8px 12px;border-bottom:1px solid var(--border)}
+.class-box-methods{padding:8px 12px}
+.class-field{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--muted);padding:2px 0;display:flex;gap:6px}
+.class-field .field-type{color:var(--blue);opacity:.8}
+.class-field .field-name{color:var(--text)}
+.class-field .field-ann{color:var(--green);font-size:8px;opacity:.7}
+.class-method{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--amber);padding:2px 0;opacity:.85}
+.class-rel{display:flex;align-items:center;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--muted);padding:4px 12px;background:var(--bg);border-top:1px solid var(--border)}
+.rel-arrow{color:var(--green);font-size:10px}
+
+/* ── DATA MODEL DIAGRAM ── */
+.db-diagram{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:12px;padding:16px;background:var(--surface2);border:1px solid var(--border);border-radius:8px}
+.db-table{background:var(--bg);border:1px solid var(--border2);border-radius:6px;min-width:170px;flex:1;overflow:hidden}
+.db-table-header{padding:7px 12px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--border)}
+.db-table-header .tbl-icon{font-size:11px}
+.db-col{font-family:'IBM Plex Mono',monospace;font-size:9px;padding:4px 12px;display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--border);transition:background .15s}
+.db-col:last-child{border-bottom:none}
+.db-col:hover{background:var(--surface2)}
+.db-col .col-key{font-size:8px;min-width:16px;text-align:center}
+.db-col .col-name{color:var(--text);flex:1}
+.db-col .col-type{color:var(--blue);opacity:.7;font-size:8.5px}
+.db-col .col-constraint{color:var(--green);opacity:.6;font-size:8px}
+.db-rel-wrap{display:flex;align-items:center;gap:8px;padding:8px 12px;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--muted)}
+.db-rel-line{flex:1;height:1px;background:var(--border);position:relative}
+.db-rel-line::after{content:'◆';position:absolute;right:-5px;top:-6px;font-size:8px;color:var(--border2)}
+
+.diagram-title{font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.diagram-title::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* WARN BOX */
+.warn-box{grid-column:1/-1;background:var(--red-dim);border:1px solid #ff6b6b30;border-left:3px solid var(--red);border-radius:6px;padding:10px 14px;font-size:12px;color:var(--muted);line-height:1.5}
+.warn-box strong{color:var(--red);font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:4px}
+
+/* FULL-WIDTH */
+.full{grid-column:1/-1}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.footer-txt{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.project-section{animation:fadeUp .5s ease both}
+.project-section:nth-child(1){animation-delay:.1s}
+.project-section:nth-child(2){animation-delay:.2s}
+.project-section:nth-child(3){animation-delay:.3s}
+
+/* ── ANKI STYLES ── */
+.anki-tab{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;padding:6px 14px;border-radius:100px;border:1px solid var(--border2);color:var(--muted);background:transparent;cursor:pointer;transition:all .2s;letter-spacing:.5px}
+.anki-tab:hover{color:var(--text);border-color:var(--text)}
+.anki-tab.active{color:#0a0a0f;background:var(--text);border-color:var(--text)}
+.anki-pane{display:none}.anki-pane.active{display:block}
+.anki-sublabel{font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.anki-sublabel::after{content:'';flex:1;height:1px;background:var(--border)}
+.anki-input{width:100%;padding:9px 12px;background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:12px;outline:none;margin-bottom:8px;transition:border-color .2s}
+.anki-input:focus{border-color:var(--border2)}
+.anki-textarea{width:100%;min-height:120px;padding:10px 12px;background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:'Syne',sans-serif;font-size:13px;line-height:1.6;outline:none;resize:vertical;margin-bottom:8px;transition:border-color .2s}
+.anki-textarea:focus{border-color:var(--border2)}
+.anki-select{padding:6px 10px;background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:11px;outline:none;cursor:pointer;margin-right:6px}
+.anki-btn-primary{font-family:'IBM Plex Mono',monospace;font-size:11px;padding:7px 16px;background:var(--green);color:#0a0a0f;border:none;border-radius:6px;cursor:pointer;font-weight:600;transition:opacity .2s}
+.anki-btn-primary:hover{opacity:.85}
+.anki-btn-green{font-family:'IBM Plex Mono',monospace;font-size:11px;padding:6px 14px;background:var(--green-dim);color:var(--green);border:1px solid var(--green-mid);border-radius:6px;cursor:pointer}
+.anki-btn-amber{font-family:'IBM Plex Mono',monospace;font-size:11px;padding:6px 14px;background:var(--amber-dim);color:var(--amber);border:1px solid var(--amber-mid);border-radius:6px;cursor:pointer}
+.anki-btn-red{font-family:'IBM Plex Mono',monospace;font-size:11px;padding:6px 14px;background:var(--red-dim);color:var(--red);border:1px solid #ff6b6b30;border-radius:6px;cursor:pointer}
+.anki-btn-muted{font-family:'IBM Plex Mono',monospace;font-size:11px;padding:6px 14px;background:transparent;color:var(--muted);border:1px solid var(--border2);border-radius:6px;cursor:pointer}
+.anki-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;font-size:13px}
+.anki-card .ac-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:6px}
+.anki-card .ac-title{font-weight:600;font-size:13px;color:var(--text);line-height:1.4}
+.anki-card .ac-body{font-size:12px;color:var(--muted);line-height:1.6;white-space:pre-wrap;word-break:break-word}
+.anki-card .ac-meta{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;align-items:center}
+.anki-badge{font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 8px;border-radius:4px;font-weight:600}
+.anki-badge.descoberta{background:var(--green-dim);color:var(--green);border:1px solid var(--green-mid)}
+.anki-badge.importante{background:var(--red-dim);color:var(--red);border:1px solid #ff6b6b30}
+.anki-badge.revisao{background:var(--amber-dim);color:var(--amber);border:1px solid var(--amber-mid)}
+.anki-badge.erro{background:#2a1a2a;color:#c084fc;border:1px solid #7c3aed30}
+.anki-badge.proj{background:var(--surface2);color:var(--muted);border:1px solid var(--border)}
+.anki-del{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);background:transparent;border:none;cursor:pointer;opacity:.5;flex-shrink:0;padding:2px 4px}
+.anki-del:hover{opacity:1;color:var(--red)}
+.anki-dv-row{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:10px 14px;display:flex;gap:10px;align-items:flex-start}
+.anki-dv-row input[type=checkbox]{accent-color:var(--green);width:14px;height:14px;margin-top:2px;flex-shrink:0;cursor:pointer}
+.anki-dv-label{font-size:13px;color:var(--muted);line-height:1.5;flex:1;cursor:pointer}
+.anki-dv-label.resolved{text-decoration:line-through;opacity:.4}
+.gls-row{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:10px 14px}
+.gls-term{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:var(--green);margin-bottom:4px}
+.gls-def{font-size:12px;color:var(--muted);line-height:1.5}
+.fc-empty{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);text-align:center;padding:40px 20px;opacity:.6}
+@media(max-width:680px){
+  .apane-notas > div, .apane-flashcards > div, .apane-duvidas > div, .apane-glossario > div{grid-template-columns:1fr !important}
+  #anotacoes{padding-left:20px!important;padding-right:20px!important}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-left">
+    <div class="eyebrow">Cronograma de estudos</div>
+    <h1>Projetos para<br>a <span>Solinfitec</span></h1>
+  </div>
+  <div class="header-meta">
+    3 projetos estratégicos<br>
+    ~15 semanas · do zero à entrega<br>
+    Java · Spring · Kafka · React · AWS
+  </div>
+</header>
+
+<nav class="nav">
+  <a href="#proj1" class="nav-pill p1">01 · API REST de Máquinas</a>
+  <a href="#proj2" class="nav-pill p2">02 · Telemetria com Kafka</a>
+  <a href="#proj3" class="nav-pill p3">03 · Dashboard Agro IoT</a>
+  <a href="#anotacoes" class="nav-pill" style="color:var(--muted)">✏ Anotações</a>
+</nav>
+<main id="conteudo-principal">
+
+<section class="overview">
+  <div class="section-title">Visão geral — 15 semanas</div>
+  <div class="timeline-bar">
+    <div class="tbar-seg p1"></div>
+    <div class="tbar-seg p2"></div>
+    <div class="tbar-seg p3"></div>
+  </div>
+  <div class="timeline-labels">
+    <div class="tl-label" style="color:var(--p1)">Semanas 1–6 · Projeto 01</div>
+    <div class="tl-label" style="color:var(--p2)">Semanas 7–10 · Projeto 02</div>
+    <div class="tl-label" style="color:var(--p3)">Semanas 11–15 · Projeto 03</div>
+  </div>
+  <div class="stats">
+    <div class="stat green"><div class="stat-val">15</div><div class="stat-lbl">Semanas</div></div>
+    <div class="stat blue"><div class="stat-val">3</div><div class="stat-lbl">Projetos</div></div>
+    <div class="stat amber"><div class="stat-val">21</div><div class="stat-lbl">Etapas</div></div>
+    <div class="stat white"><div class="stat-val">15+</div><div class="stat-lbl">Ferramentas</div></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     PROJETO 01
+══════════════════════════════════════════════════ -->
+<section class="project-section" id="proj1">
+  <div class="project-header">
+    <div class="proj-number p1-color">01</div>
+    <div class="proj-meta">
+      <div class="proj-badge p1">Base · Semanas 1–6</div>
+      <div class="proj-title">API REST de Máquinas</div>
+      <div class="proj-desc">Fundação obrigatória da stack. Sistema de cadastro e monitoramento de máquinas agrícolas com autenticação JWT, tratamento de erros global, testes automatizados e deploy real na AWS.</div>
+      <div class="proj-tags">
+        <span class="tag">Spring Boot 3</span><span class="tag">PostgreSQL</span><span class="tag">JWT</span><span class="tag">Swagger</span><span class="tag">JUnit 5</span><span class="tag">Mockito</span><span class="tag">Docker</span><span class="tag">AWS EC2</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-row"><span>Progresso</span><span id="prog1-txt">0%</span></div>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="prog1-bar" style="width:0%;background:var(--p1)"></div></div>
+  </div>
+
+  <div class="steps" id="steps-p1">
+
+    <!-- 1.1 -->
+    <div class="step">
+      <div class="step-dot" style="border-color:var(--green-mid)"></div>
+      <div class="step-inner">
+        <div class="step-head">
+          <span class="step-num">1.1</span>
+          <span class="step-title">Ambiente de desenvolvimento</span>
+          <span class="step-duration">2–3 dias</span>
+          <span class="step-arrow">›</span>
+        </div>
+        <div class="step-body"><div class="sbg">
+          <div>
+            <div class="sub-label">O que fazer</div>
+            <ul class="checklist">
+              <li><span class="check-box"></span>Instalar JDK 17 via sdkman ou site oficial</li>
+              <li><span class="check-box"></span>Instalar IntelliJ IDEA Community (ou VS Code + Extension Pack for Java)</li>
+              <li><span class="check-box"></span>Instalar Docker Desktop e testar com docker run hello-world</li>
+              <li><span class="check-box"></span>Criar projeto no start.spring.io (Spring Web, JPA, PostgreSQL, Validation, Security, Devtools)</li>
+              <li><span class="check-box"></span>Criar repositório no GitHub e fazer primeiro commit</li>
+              <li><span class="check-box"></span>Configurar .gitignore (excluir /target, *.class, application-prod.yml)</li>
+              <li><span class="check-box"></span>Criar endpoint GET /health retornando "OK" e testar no browser</li>
+            </ul>
+          </div>
+          <div>
+            <div class="sub-label">Ferramentas</div>
+            <div class="tools-list">
+              <div class="tool-item"><div class="tool-icon" style="background:#1a3a2a;color:#00e5a0">J17</div><div><div class="tool-name">JDK 17</div><div class="tool-use">Runtime — LTS obrigatório</div></div></div>
+              <div class="tool-item"><div class="tool-icon" style="background:#1a2a3a;color:#4da6ff">IJ</div><div><div class="tool-name">IntelliJ IDEA</div><div class="tool-use">IDE com suporte nativo a Spring</div></div></div>
+              <div class="tool-item"><div class="tool-icon" style="background:#1a3a3a;color:#00e5a0">DK</div><div><div class="tool-name">Docker Desktop</div><div class="tool-use">Subir banco e serviços localmente</div></div></div>
+              <div class="tool-item"><div class="tool-icon" style="background:#3a1a2a;color:#ffb84d">GH</div><div><div class="tool-name">GitHub</div><div class="tool-use">Versionamento + portfólio</div></div></div>
+            </div>
+          </div>
+          <div class="deliverable" style="border-left-color:var(--p1)">
+            <strong>✓ Entrega</strong>
+            Spring Boot rodando na porta 8080. GET /health funciona. Projeto no GitHub com README inicial.
+          </div>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- 1.2 -->
+    <div class="step">
+      <div class="step-dot" style="border-color:var(--green-mid)"></div>
+      <div class="step-inner">
+        <div class="step-head">
+          <span class="step-num">1.2</span>
+          <span class="step-title">Banco de dados + entidade Maquina</span>
+          <span class="step-duration">3–4 dias</span>
+          <span class="step-arrow">›</span>
+        </div>
+        <div class="step-body"><div class="sbg">
+          <div>
+            <div class="sub-label">O que fazer</div>
+            <ul class="checklist">
+              <li><span class="check-box"></span>Criar docker-compose.yml com serviço postgres:15</li>
+              <li><span class="check-box"></span>Configurar application.yml com datasource, JPA e Flyway</li>
+              <li><span class="check-box"></span>Criar profiles: application-dev.yml e application-prod.yml</li>
+              <li><span class="check-box"></span>Criar migration V1__create_maquinas.sql no Flyway</li>
+              <li><span class="check-box"></span>Criar entidade @Entity Maquina com campos: id, nome, modelo, status, dataHoraCadastro</li>
+              <li><span class="check-box"></span>Criar MaquinaRepository extends JpaRepository</li>
+              <li><span class="check-box"></span>Testar conexão — banco cria a tabela automaticamente</li>
+              <li><span class="check-box"></span>Instalar DBeaver e conectar ao banco local</li>
+            </ul>
+          </div>
+          <div>
+            <div class="sub-label">Ferramentas</div>
+            <div class="tools-list">
+              <div class="tool-item"><div class="tool-icon" style="background:#1a3a2a;color:#00e5a0">PG</div><div><div class="tool-name">PostgreSQL 15</div><div class="tool-use">Banco relacional via Docker</div></div></div>
+              <div class="tool-item"><div class="tool-icon" style="background:#2a1a3a;color:#c084fc">HB</div><div><div class="tool-name">Hibernate / JPA</div><div class="tool-use">ORM e mapeamento objeto-relacional</div></div></div>
+              <div class="tool-item"><div class="tool-icon" style="background:#3a2a1a;color:#ffb84d">FW</div><div><div class="tool-name">Flyway</div><div class="tool-use">Versionamento do schema SQL</div></div></div>
+              <div class="tool-item"><div class="tool-icon" style="background:#1a2a3a;color:#4da6ff">DB</div><div><div class="tool-name">DBeaver</div><div class="tool-use">GUI para inspecionar o banco</div></div></div>
+            </div>
+          </div>
+          <div class="folder-tree-wrap">
+            <div class="ft-title">Estrutura de pastas — Projeto 01 completo</div>
+            <div class="folder-tree">
+<span class="ft-dir">maquinas-api/</span>
+├── <span class="ft-dir">src/</span>
+│   ├── <span class="ft-dir">main/</span>
+│   │   ├── <span class="ft-dir">java/com/solinfitec/maquinas/</span>
+│   │   │   ├── <span class="ft-dir">controller/</span>
+│   │   │   │   └── <span class="ft-file">MaquinaController.java</span>  <span class="ft-ann">← @RestController, endpoints CRUD</span>
+│   │   │   ├── <span class="ft-dir">service/</span>
+│   │   │   │   └── <span class="ft-file">MaquinaService.java</span>      <span class="ft-ann">← @Service, regras de negócio</span>
+│   │   │   ├── <span class="ft-dir">repository/</span>
+│   │   │   │   └── <span class="ft-file">MaquinaRepository.java</span>   <span class="ft-ann">← extends JpaRepository</span>
+│   │   │   ├── <span class="ft-dir">model/</span>
+│   │   │   │   └── <span class="ft-file">Maquina.java</span>             <span class="ft-ann">← @Entity, campos da tabela</span>
+│   │   │   ├── <span class="ft-dir">dto/</span>
+│   │   │   │   ├── <span class="ft-file">MaquinaRequestDTO.java</span>   <span class="ft-ann">← dados que chegam na API</span>
+│   │   │   │   └── <span class="ft-file">MaquinaResponseDTO.java</span>  <span class="ft-ann">← dados que saem da API</span>
+│   │   │   ├── <span class="ft-dir">security/</span>
+│   │   │   │   ├── <span class="ft-file">JwtFilter.java</span>           <span class="ft-ann2">← OncePerRequestFilter, valida token</span>
+│   │   │   │   ├── <span class="ft-file">JwtService.java</span>          <span class="ft-ann2">← gera e valida JWT</span>
+│   │   │   │   └── <span class="ft-file">SecurityConfig.java</span>      <span class="ft-ann2">← SecurityFilterChain</span>
+│   │   │   ├── <span class="ft-dir">exception/</span>
+│   │   │   │   ├── <span class="ft-file">GlobalExceptionHandler.java</span> <span class="ft-ann3">← @ControllerAdvice</span>
+│   │   │   │   └── <span class="ft-file">MaquinaNotFoundException.java</span>
+│   │   │   └── <span class="ft-file">MaquinasApiApplication.java</span>
+│   │   └── <span class="ft-dir">resources/</span>
+│   │       ├── <span class="ft-dir">db/migration/</span>
+│   │       │   └── <span class="ft-file">V1__create_maquinas.sql</span>  <span class="ft-ann">← SQL do Flyway</span>
+│   │       ├── <span class="ft-file">application.yml</span>
+│   │       ├── <span class="ft-file">application-dev.yml</span>      <span class="ft-ann">← config local</span>
+│   │       └── <span class="ft-file">application-prod.yml</span>     <span class="ft-ann">← config AWS (não commitar!)</span>
+│   └── <span class="ft-dir">test/java/com/solinfitec/maquinas/</span>
+│       ├── <span class="ft-file">MaquinaServiceTest.java</span>      <span class="ft-ann">← JUnit 5 + Mockito</span>
+│       └── <span class="ft-file">MaquinaControllerTest.java</span>   <span class="ft-ann">← @SpringBootTest ou @WebMvcTest</span>
+├── <span class="ft-file">docker-compose.yml</span>               <span class="ft-ann">← postgres + pgadmin</span>
+├── <span class="ft-file">Dockerfile</span>                       <span class="ft-ann">← para deploy na EC2</span>
+├── <span class="ft-file">pom.xml</span>
+└── <span class="ft-file">README.md</span>                        <span class="ft-ann">← URL pública + como rodar</span>
+            </div>
+          </div>
+          <div class="deliverable" style="border-left-color:var(--p1)">
+            <strong>✓ Entrega</strong>
+            Tabela maquinas criada pelo Flyway. Spring conecta sem erros. DBeaver mostra a tabela e colunas.
+          </div>
+
+          <!-- ── DIAGRAMA DE ARQUITETURA ── -->
+          <div class="arch-section">
+            <div class="diagram-title">🏗 Arquitetura de camadas — Projeto 01</div>
+            <div class="arch-diagram">
+              <div class="arch-node-box">
+                <div class="arch-icon" style="background:#1a2a1a;border-color:#00e5a040;color:#00e5a0">📱</div>
+                <div class="arch-label">Client<br>HTTP</div>
+                <div class="arch-sublabel">Postman / Browser</div>
+              </div>
+              <div class="arch-arrow"><div class="arch-arrow-line"></div><div class="arch-arrow-label">HTTPS</div></div>
+              <div class="arch-node-box">
+                <div class="arch-icon" style="background:#1a1a2a;border-color:#4da6ff40;color:#4da6ff">🔒</div>
+                <div class="arch-label">Spring<br>Security</div>
+                <div class="arch-sublabel">JWT Filter</div>
+              </div>
+              <div class="arch-arrow"><div class="arch-arrow-line"></div><div class="arch-arrow-label">req válido</div></div>
+              <div class="arch-node-box">
+                <div class="arch-icon" style="background:#1a2a1a;border-color:#00e5a040;color:#00e5a0">🎮</div>
+                <div class="arch-label">Controller</div>
+                <div class="arch-sublabel">@RestController</div>
+              </div>
+              <div class="arch-arrow"><div class="arch-arrow-line"></div><div class="arch-arrow-label">chama</div></div>
+              <div class="arch-node-box">
+                <div class="arch-icon" style="background:#2a1a2a;border-color:#c084fc40;color:#c084fc">⚙️</div>
+                <div class="arch-label">Service</div>
+                <div class="arch-sublabel">@Service</div>
+              </div>
+              <div class="arch-arrow"><div class="arch-arrow-line"></div><div class="arch-arrow-label">query</div></div>
+              <div class="arch-node-box">
+                <div class="arch-icon" style="background:#1a2a3a;border-color:#4da6ff40;color:#4da6ff">🗄</div>
+                <div class="arch-label">Repository</div>
+                <div class="arch-sublabel">JpaRepository</div>
+              </div>
+              <div class="arch-arrow"><div class="arch-arrow-line"></div><div class="arch-arrow-label">SQL</div></div>
+              <div class="arch-node-box">
+                <div class="arch-icon" style="background:#1a3a2a;border-color:#00e5a040;color:#00e5a0">🐘</div>
+                <div class="arch-label">PostgreSQL</div>
+                <div class="arch-sublabel">Docker / AWS RDS</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── DIAGRAMA DE CLASSES ── -->
+          <div class="arch-section">
+            <div class="diagram-title">🧩 Diagrama de classes — Projeto 01</div>
+            <div class="class-diagram">
+              <div class="class-box" style="border-top:2px solid var(--green)">
+                <div class="class-box-header" style="color:var(--green)">
+                  <span class="stereotype">@Entity</span> Maquina
+                </div>
+                <div class="class-box-fields">
+                  <div class="class-field"><span class="field-ann">🔑 PK</span><span class="field-type">Long</span><span class="field-name">id</span></div>
+                  <div class="class-field"><span class="field-ann">   </span><span class="field-type">String</span><span class="field-name">nome</span></div>
+                  <div class="class-field"><span class="field-ann">   </span><span class="field-type">String</span><span class="field-name">modelo</span></div>
+                  <div class="class-field"><span class="field-ann">   </span><span class="field-type">StatusEnum</span><span class="field-name">status</span></div>
+                  <div class="class-field"><span class="field-ann">   </span><span class="field-type">LocalDateTime</span><span class="field-name">cadastradoEm</span></div>
+                  <div class="class-field"><span class="field-ann">FK </span><span class="field-type">Usuario</span><span class="field-name">proprietario</span></div>
+                </div>
+                <div class="class-box-methods">
+                  <div class="class-method">+ getId(): Long</div>
+                  <div class="class-method">+ isAtiva(): boolean</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;color:var(--green);font-size:18px;padding:0 4px">⇐</div>
+              <div class="class-box" style="border-top:2px solid var(--blue)">
+                <div class="class-box-header" style="color:var(--blue)">
+                  <span class="stereotype">@Service</span> MaquinaService
+                </div>
+                <div class="class-box-fields">
+                  <div class="class-field"><span class="field-ann">   </span><span class="field-type">MaquinaRepository</span><span class="field-name">repository</span></div>
+                </div>
+                <div class="class-box-methods">
+                  <div class="class-method">+ criar(dto): MaquinaResponse</div>
+                  <div class="class-method">+ listar(page): Page&lt;MaquinaResponse&gt;</div>
+                  <div class="class-method">+ buscarPorId(id): MaquinaResponse</div>
+                  <div class="class-method">+ atualizar(id, dto): MaquinaResponse</div>
+                  <div class="class-method">+ deletar(id): void</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;color:var(--blue);font-size:18px;padding:0 4px">⇐</div>
+              <div class="class-box" style="border-top:2px solid var(--blue)">
+                <div class="class-box-header" style="color:var(--blue)">
+                  <span class="stereotype">@RestController</span> MaquinaController
+                </div>
+                <div class="class-box-fields">
+                  <div class="class-field"><span class="field-ann">   </span><span class="field-type">MaquinaService</span><span class="field-name">service</span></div>
+                </div>
+                <div class="class-box-methods">
+                  <div class="class-method">POST /maquinas → 201</div>
+                  <div class="class-method">GET /maquinas → 200 Page</div>
+                  <div class="class-method">GET /maquinas/{id} → 200/404</div>
+                  <div class="class-method">PUT /maquinas/{id} → 200</div>
+                  <div class="class-method">DELETE /maquinas/{id} → 204</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;color:var(--amber);font-size:18px;padding:0 4px">⇦</div>
+              <div class="class-box" style="border-top:2px solid var(--amber)">
+                <div class="class-box-header" style="color:var(--amber)">
+                  <span class="stereotype">record</span> MaquinaRequestDTO
+                </div>
+                <div class="class-box-fields">
+                  <div class="class-field"><span class="field-ann">✔  </span><span class="field-type">String</span><span class="field-name">nome</span></div>
+                  <div class="class-field"><span class="field-ann">✔  </span><span class="field-type">String</span><span class="field-name">modelo</span></div>
+                  <div class="class-field"><span class="field-ann">✔  </span><span class="field-type">StatusEnum</span><span class="field-name">status</span></div>
+                </div>
+                <div class="class-box-methods"><div class="class-method" style="color:var(--muted)">// @Valid nas anotações</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── MODELO DE DADOS ── -->
+          <div class="arch-section">
+            <div class="diagram-title">🗃 Modelo relacional de dados — Projeto 01</div>
+            <div class="db-diagram">
+              <div class="db-table" style="border-top:2px solid var(--green)">
+                <div class="db-table-header" style="color:var(--green)"><span class="tbl-icon">📋</span>maquinas</div>
+                <div class="db-col"><span class="col-key" style="color:#ffd700">🔑</span><span class="col-name">id</span><span class="col-type">BIGSERIAL</span><span class="col-constraint">PK</span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">nome</span><span class="col-type">VARCHAR(100)</span><span class="col-constraint">NOT NULL</span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">modelo</span><span class="col-type">VARCHAR(100)</span><span class="col-constraint">NOT NULL</span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">status</span><span class="col-type">VARCHAR(20)</span><span class="col-constraint">NOT NULL</span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">cadastrado_em</span><span class="col-type">TIMESTAMPTZ</span><span class="col-constraint">DEFAULT now()</span></div>
+                <div class="db-col"><span class="col-key" style="color:#60a5fa">🔗</span><span class="col-name">usuario_id</span><span class="col-type">BIGINT</span><span class="col-constraint">FK → usuarios</span></div>
+              </div>
+              <div style="display:flex;align-items:center;flex-direction:column;gap:4px;padding:0 8px">
+                <span style="font-family:monospace;font-size:10px;color:var(--muted)">N : 1</span>
+                <span style="color:var(--blue);font-size:16px">↔</span>
+              </div>
+              <div class="db-table" style="border-top:2px solid var(--blue)">
+                <div class="db-table-header" style="color:var(--blue)"><span class="tbl-icon">👤</span>usuarios</div>
+                <div class="db-col"><span class="col-key" style="color:#ffd700">🔑</span><span class="col-name">id</span><span class="col-type">BIGSERIAL</span><span class="col-constraint">PK</span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">nome</span><span class="col-type">VARCHAR(100)</span><span class="col-constraint">NOT NULL</span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">email</span><span class="col-type">VARCHAR(150)</span><span class="col-constraint">UNIQUE</span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">senha_hash</span><span class="col-type">VARCHAR(255)</span><span class="col-constraint">NOT NULL</span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">role</span><span class="col-type">VARCHAR(20)</span><span class="col-constraint">DEFAULT 'USER'</span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">criado_em</span><span class="col-type">TIMESTAMPTZ</span><span class="col-constraint">DEFAULT now()</span></div>
+              </div>
+              <div style="display:flex;align-items:center;flex-direction:column;gap:4px;padding:0 8px">
+                <span style="font-family:monospace;font-size:10px;color:var(--muted)">1 : N</span>
+                <span style="color:var(--amber);font-size:16px">↔</span>
+              </div>
+              <div class="db-table" style="border-top:2px solid var(--amber)">
+                <div class="db-table-header" style="color:var(--amber)"><span class="tbl-icon">🔐</span>flyway_schema_history</div>
+                <div class="db-col"><span class="col-key" style="color:#ffd700">🔑</span><span class="col-name">installed_rank</span><span class="col-type">INT</span><span class="col-constraint">PK</span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">version</span><span class="col-type">VARCHAR(50)</span><span class="col-constraint"></span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">description</span><span class="col-type">VARCHAR(200)</span><span class="col-constraint"></span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">script</span><span class="col-type">VARCHAR(1000)</span><span class="col-constraint"></span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">success</span><span class="col-type">BOOLEAN</span><span class="col-constraint">NOT NULL</span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">installed_on</span><span class="col-type">TIMESTAMP</span><span class="col-constraint"></span></div>
+              </div>
+            </div>
+          </div>
+
+        </div></div>
+      </div>
+    </div>
+
+    <!-- 1.3 -->
+    <div class="step">
+      <div class="step-dot" style="border-color:var(--green-mid)"></div>
+      <div class="step-inner">
+        <div class="step-head">
+          <span class="step-num">1.3</span>
+          <span class="step-title">CRUD completo — Controller, Service, DTOs</span>
+          <span class="step-duration">4–5 dias</span>
+          <span class="step-arrow">›</span>
+        </div>
+        <div class="step-body"><div class="sbg">
+          <div>
+            <div class="sub-label">O que fazer</div>
+            <ul class="checklist">
+              <li><span class="check-box"></span>Criar MaquinaRequestDTO e MaquinaResponseDTO (sem expor a entidade diretamente)</li>
+              <li><span class="check-box"></span>Criar MaquinaService com métodos: criar, listar, buscarPorId, atualizar, deletar</li>
+              <li><span class="check-box"></span>Criar MaquinaController com @RestController e @RequestMapping("/maquinas")</li>
+              <li><span class="check-box"></span>POST /maquinas → 201 Created com body</li>
+              <li><span class="check-box"></span>GET /maquinas → lista paginada (Pageable)</li>
+              <li><span class="check-box"></span>GET /maquinas/{id} → 200 ou 404</li>
+              <li><span class="check-box"></span>PUT /maquinas/{id} → atualização parcial</li>
+              <li><span class="check-box"></span>DELETE /maquinas/{id} → 204 No Content</li>
+              <li><span class="check-box"></span>Adicionar @Valid + anotações Bean Validation no DTO</li>
+              <li><span class="check-box"></span>Testar todos os endpoints no Postman com coleção salva</li>
+            </ul>
+          </div>
+          <div>
+            <div class="sub-label">Ferramentas</div>
+            <div class="tools-list">
+              <div class="tool-item"><div class="tool-icon" style="background:#1a3a2a;color:#00e5a0">SB</div><div><div class="tool-name">Spring MVC</div><div class="tool-use">@RestController, @RequestBody, etc.</div></div></div>
+              <div class="tool-item"><div class="tool-icon" style="background:#3a1a2a;color:#ff6b9d">PM</div><div><div class="tool-name">Postman</div><div class="tool-use">Testar e documentar requests</div></div></div>
+              <div class="tool-item"><div class="tool-icon" style="background:#1a2a3a;color:#4da6ff">BV</div><div><div class="tool-name">Bean Validation</div><div class="tool-use">@NotBlank, @NotNull, @Size</div></div></div>
+            </div>
+          </div>
+          <div class="deliverable" style="border-left-color:var(--p1)">
+            <strong>✓ Entrega</strong>
+            CRUD 100% funcional. Paginação funcionando. Erros de validação retornam JSON com mensagem clara. Coleção Postman exportada no repositório.
+          </div>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- 1.4 -->
+    <div class="step">
+      <div class="step-dot" style="border-color:var(--green-mid)"></div>
+      <div class="step-inner">
+        <div class="step-head">
+          <span class="step-num">1.4</span>
+          <span class="step-title">Tratamento de erros global + @ControllerAdvice</span>
+          <span class="step-duration">2–3 dias</span>
+          <span class="step-arrow">›</span>
+        </div>
+        <div class="step-body"><div class="sbg">
+          <div>
+            <div class="sub-label">O que fazer</div>
+            <ul class="checklist">
+              <li><span class="check-box"></span>Criar classe GlobalExceptionHandler com @ControllerAdvice</li>
+              <li><span class="check-box"></span>Criar MaquinaNotFoundException extends RuntimeException</li>
+              <li><span class="check-box"></span>Handler para NotFoundException → 404 com mensagem legível</li>
+              <li><span class="check-box"></span>Handler para MethodArgumentNotValidException → 400 listando todos os erros</li>
+              <li><span class="check-box"></span>Criar classe ErrorResponse (timestamp, status, message, path)</li>
+              <li><span class="check-box"></span>Testar: buscar id que não existe → retorna JSON de erro correto</li>
+              <li><span class="check-box"></span>Testar: POST com campo vazio → retorna lista dos campos inválidos</li>
+            </ul>
+          </div>
+          <div>
+            <div class="sub-label">Por que isso importa</div>
+            <div class="warn-box">
+              <strong>⚠ Ponto de atenção</strong>
+              Sem @ControllerAdvice, sua API retorna stack trace de Java para o cliente — péssima prática. Recrutadores olham isso. Todo projeto Spring profissional tem essa camada.
+            </div>
+          </div>
+          <div class="deliverable" style="border-left-color:var(--p1)">
+            <strong>✓ Entrega</strong>
+            API nunca expõe stack trace. Todos os erros retornam JSON estruturado com status HTTP correto.
+          </div>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- 1.5 -->
+    <div class="step">
+      <div class="step-dot" style="border-color:var(--green-mid)"></div>
+      <div class="step-inner">
+        <div class="step-head">
+          <span class="step-num">1.5</span>
+          <span class="step-title">Autenticação JWT + Spring Security</span>
+          <span class="step-duration">5–6 dias</span>
+          <span class="step-arrow">›</span>
+        </div>
+        <div class="step-body"><div class="sbg">
+          <div>
+            <div class="sub-label">O que fazer</div>
+            <ul class="checklist">
+              <li><span class="check-box"></span>Adicionar dependência spring-security e jjwt (0.11+)</li>
+              <li><span class="check-box"></span>Criar migration V2__create_usuarios.sql</li>
+              <li><span class="check-box"></span>Criar entidade Usuario com roles (ROLE_USER, ROLE_ADMIN)</li>
+              <li><span class="check-box"></span>Criar JwtService: generateToken, validateToken, extractUsername</li>
+              <li><span class="check-box"></span>Criar JwtFilter extends OncePerRequestFilter</li>
+              <li><span class="check-box"></span>Criar SecurityConfig com SecurityFilterChain e rota /auth/** pública</li>
+              <li><span class="check-box"></span>Criar AuthController com POST /auth/register e POST /auth/login</li>
+              <li><span class="check-box"></span>Testar: sem token → 401. Com token válido → 200. Token expirado → 403</li>
+            </ul>
+          </div>
+          <div>
+            <div class="sub-label">Ferramentas</div>
+            <div class="tools-list">
+              <div class="tool-item"><div class="tool-icon" style="background:#1a3a2a;color:#00e5a0">SS</div><div><div class="tool-name">Spring Security</div><div class="tool-use">Filtros, autenticação, autorização</div></div></div>
+              <div class="tool-item"><div class="tool-icon" style="background:#3a2a1a;color:#ffb84d">JWT</div><div><div class="tool-name">jjwt 0.11+</div><div class="tool-use">Gerar e validar tokens JWT</div></div></div>
+            </div>
+            <div class="warn-box" style="margin-top:10px">
+              <strong>⚠ Ponto mais difícil do projeto</strong>
+              Spring Security 6+ mudou muito. Reserve tempo extra. Se travar, cheque se está usando a API nova (SecurityFilterChain) e não a antiga (WebSecurityConfigurerAdapter).
+            </div>
+          </div>
+          <div class="deliverable" style="border-left-color:var(--p1)">
+            <strong>✓ Entrega</strong>
+            Login retorna token JWT. Todos os endpoints /maquinas exigem Bearer token. 401 sem token, 200 com token válido.
+          </div>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- 1.6 -->
+    <div class="step">
+      <div class="step-dot" style="border-color:var(--green-mid)"></div>
+      <div class="step-inner">
+        <div class="step-head">
+          <span class="step-num">1.6</span>
+          <span class="step-title">Testes, Swagger, Git semântico e deploy AWS</span>
+          <span class="step-duration">5–6 dias</span>
+          <span class="step-arrow">›</span>
+        </div>
+        <div class="step-body"><div class="sbg">
+          <div>
+            <div class="sub-label">Testes</div>
+            <ul class="checklist">
+              <li><span class="check-box"></span>Escrever MaquinaServiceTest com JUnit 5 + Mockito (mock do repository)</li>
+              <li><span class="check-box"></span>Testar: criar máquina, buscar por id inexistente lança exceção</li>
+              <li><span class="check-box"></span>Escrever MaquinaControllerTest com @WebMvcTest</li>
+              <li><span class="check-box"></span>Checar cobertura com mvn test (goal: +70%)</li>
+            </ul>
+            <div class="sub-label" style="margin-top:12px">Swagger + Git</div>
+            <ul class="checklist">
+              <li><span class="check-box"></span>Adicionar springdoc-openapi-starter-webmvc-ui</li>
+              <li><span class="check-box"></span>Anotar endpoints com @Operation e @ApiResponse</li>
+              <li><span class="check-box"></span>Usar commits semânticos: feat:, fix:, docs:, test:, refactor:</li>
+              <li><span class="check-box"></span>Criar branch develop, mergear para main via PR</li>
+            </ul>
+          </div>
+          <div>
+            <div class="sub-label">Deploy AWS</div>
+            <ul class="checklist">
+              <li><span class="check-box"></span>Criar Dockerfile (FROM eclipse-temurin:17-jre)</li>
+              <li><span class="check-box"></span>Gerar JAR: mvn clean package -DskipTests</li>
+              <li><span class="check-box"></span>Criar instância EC2 t2.micro (free tier)</li>
+              <li><span class="check-box"></span>Instalar Docker na EC2 via SSH</li>
+              <li><span class="check-box"></span>Liberar porta 8080 no Security Group</li>
+              <li><span class="check-box"></span>Subir container e testar via IP público</li>
+              <li><span class="check-box"></span>Atualizar README com URL pública e instruções</li>
+            </ul>
+          </div>
+          <div class="deliverable" style="border-left-color:var(--p1)">
+            <strong>✓ Entrega final — Projeto 01</strong>
+            API pública na AWS. Swagger em /swagger-ui.html. Testes passando. GitHub com commits semânticos, README completo e link para a API.
+          </div>
+        </div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     PROJETO 02
+══════════════════════════════════════════════════ -->
+<section class="project-section" id="proj2">
+  <div class="project-header">
+    <div class="proj-number p2-color">02</div>
+    <div class="proj-meta">
+      <div class="proj-badge p2">Diferencial · Semanas 7–10</div>
+      <div class="proj-title">Telemetria com Kafka</div>
+      <div class="proj-desc">Arquitetura event-driven com dois microserviços independentes. Producer simula e publica dados de máquinas, Consumer processa, persiste histórico e trata falhas com Dead Letter Queue.</div>
+      <div class="proj-tags">
+        <span class="tag">Apache Kafka</span><span class="tag">Microserviços</span><span class="tag">Docker Compose</span><span class="tag">Spring Cloud</span><span class="tag">Event-Driven</span><span class="tag">Dead Letter Queue</span><span class="tag">JUnit 5</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-row"><span>Progresso</span><span id="prog2-txt">0%</span></div>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="prog2-bar" style="width:0%;background:var(--p2)"></div></div>
+  </div>
+
+  <div class="steps" id="steps-p2">
+
+    <!-- 2.1 -->
+    <div class="step">
+      <div class="step-dot" style="border-color:var(--blue-mid)"></div>
+      <div class="step-inner">
+        <div class="step-head">
+          <span class="step-num">2.1</span>
+          <span class="step-title">Teoria event-driven + Kafka rodando local</span>
+          <span class="step-duration">3–4 dias</span>
+          <span class="step-arrow">›</span>
+        </div>
+        <div class="step-body"><div class="sbg">
+          <div>
+            <div class="sub-label">O que estudar / fazer</div>
+            <ul class="checklist">
+              <li><span class="check-box"></span>Entender: o que é um broker, tópico, partição, offset, consumer group</li>
+              <li><span class="check-box"></span>Criar docker-compose com Kafka + Zookeeper + Kafdrop</li>
+              <li><span class="check-box"></span>Subir com docker-compose up e verificar logs</li>
+              <li><span class="check-box"></span>Criar tópico maquinas-telemetria via CLI (kafka-topics.sh)</li>
+              <li><span class="check-box"></span>Enviar mensagem de teste via kafka-console-producer.sh</li>
+              <li><span class="check-box"></span>Receber mensagem via kafka-console-consumer.sh</li>
+              <li><span class="check-box"></span>Abrir Kafdrop (localhost:9000) e visualizar o tópico</li>
+            </ul>
+          </div>
+          <div>
+            <div class="sub-label">Ferramentas</div>
+            <div class="tools-list">
+              <div class="tool-item"><div class="tool-icon" style="background:#1a2a3a;color:#4da6ff">K</div><div><div class="tool-name">Apache Kafka</div><div class="tool-use">Message broker central</div></div></div>
+              <div class="tool-item"><div class="tool-icon" style="background:#1a3a3a;color:#00e5a0">ZK</div><div><div class="tool-name">Zookeeper</div><div class="tool-use">Coordenação do cluster Kafka</div></div></div>
+              <div class="tool-item"><div class="tool-icon" style="background:#3a1a2a;color:#ff6b9d">KD</div><div><div class="tool-name">Kafdrop</div><div class="tool-use">UI web para inspecionar tópicos</div></div></div>
+            </div>
+            <div class="warn-box" style="margin-top:10px">
+              <strong>⚠ Atenção</strong>
+              Kafka é sensível a configurações de rede no Docker. Se a conexão falhar do Spring para o Kafka, verifique KAFKA_ADVERTISED_LISTENERS no docker-compose.
+            </div>
+          </div>
+          <div class="deliverable" style="border-left-color:var(--p2)">
+            <strong>✓ Entrega</strong>
+            Kafka rodando via Docker. Mensagem enviada e recebida via CLI. Tópico visível no Kafdrop com mensagem de teste.
+          </div>
+
+          <!-- ── ARQUITETURA KAFKA ── -->
+          <div class="arch-section">
+            <div class="diagram-title">🏗 Arquitetura event-driven — Projeto 02</div>
+            <div class="arch-diagram">
+              <div class="arch-node-box">
+                <div class="arch-icon" style="background:#1a2a3a;border-color:#ffb84d40;color:#ffb84d">⏱</div>
+                <div class="arch-label">@Scheduled<br>Simulator</div>
+                <div class="arch-sublabel">a cada 5s</div>
+              </div>
+              <div class="arch-arrow"><div class="arch-arrow-line"></div><div class="arch-arrow-label">evento JSON</div></div>
+              <div class="arch-node-box">
+                <div class="arch-icon" style="background:#1a2a3a;border-color:#4da6ff40;color:#4da6ff">📤</div>
+                <div class="arch-label">Producer<br>Service</div>
+                <div class="arch-sublabel">porta 8081</div>
+              </div>
+              <div class="arch-arrow"><div class="arch-arrow-line"></div><div class="arch-arrow-label">KafkaTemplate</div></div>
+              <div class="arch-node-box">
+                <div class="arch-icon" style="background:#2a1a1a;border-color:#ff6b6b40;color:#ff6b6b">📨</div>
+                <div class="arch-label">Apache<br>Kafka</div>
+                <div class="arch-sublabel">tópico: maquinas-telemetria</div>
+              </div>
+              <div class="arch-arrow"><div class="arch-arrow-line"></div><div class="arch-arrow-label">@KafkaListener</div></div>
+              <div class="arch-node-box">
+                <div class="arch-icon" style="background:#1a2a3a;border-color:#4da6ff40;color:#4da6ff">📥</div>
+                <div class="arch-label">Consumer<br>Service</div>
+                <div class="arch-sublabel">porta 8082</div>
+              </div>
+              <div class="arch-arrow"><div class="arch-arrow-line"></div><div class="arch-arrow-label">persiste</div></div>
+              <div class="arch-node-box">
+                <div class="arch-icon" style="background:#1a3a2a;border-color:#00e5a040;color:#00e5a0">🐘</div>
+                <div class="arch-label">PostgreSQL<br>Histórico</div>
+                <div class="arch-sublabel">telemetria_historico</div>
+              </div>
+              <div class="arch-arrow" style="opacity:.5"><div class="arch-arrow-line" style="background:var(--red);opacity:.5"></div><div class="arch-arrow-label" style="color:var(--red)">erro</div></div>
+              <div class="arch-node-box">
+                <div class="arch-icon" style="background:#2a1a1a;border-color:#ff6b6b40;color:#ff6b6b">☠️</div>
+                <div class="arch-label">Dead Letter<br>Topic</div>
+                <div class="arch-sublabel">msgs inválidas</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── DIAGRAMA DE CLASSES KAFKA ── -->
+          <div class="arch-section">
+            <div class="diagram-title">🧩 Diagrama de classes — Projeto 02</div>
+            <div class="class-diagram">
+              <div class="class-box" style="border-top:2px solid var(--amber)">
+                <div class="class-box-header" style="color:var(--amber)">
+                  <span class="stereotype">record</span> TelemetriaEvento
+                </div>
+                <div class="class-box-fields">
+                  <div class="class-field"><span class="field-ann">   </span><span class="field-type">String</span><span class="field-name">maquinaId</span></div>
+                  <div class="class-field"><span class="field-ann">   </span><span class="field-type">Double</span><span class="field-name">temperatura</span></div>
+                  <div class="class-field"><span class="field-ann">   </span><span class="field-type">Double</span><span class="field-name">umidade</span></div>
+                  <div class="class-field"><span class="field-ann">   </span><span class="field-type">Instant</span><span class="field-name">timestamp</span></div>
+                </div>
+                <div class="class-box-methods"><div class="class-method" style="color:var(--muted)">// payload JSON Kafka</div></div>
+              </div>
+              <div style="display:flex;align-items:center;color:var(--amber);font-size:18px;padding:0 4px">→</div>
+              <div class="class-box" style="border-top:2px solid var(--blue)">
+                <div class="class-box-header" style="color:var(--blue)">
+                  <span class="stereotype">@Component</span> EventoProducer
+                </div>
+                <div class="class-box-fields">
+                  <div class="class-field"><span class="field-ann">   </span><span class="field-type">KafkaTemplate</span><span class="field-name">kafka</span></div>
+                </div>
+                <div class="class-box-methods">
+                  <div class="class-method">+ publicar(TelemetriaEvento): void</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;color:var(--blue);font-size:18px;padding:0 4px">→</div>
+              <div class="class-box" style="border-top:2px solid var(--red)">
+                <div class="class-box-header" style="color:var(--red)">
+                  <span class="stereotype">@Component</span> EventoConsumer
+                </div>
+                <div class="class-box-fields">
+                  <div class="class-field"><span class="field-ann">   </span><span class="field-type">TelemetriaService</span><span class="field-name">service</span></div>
+                </div>
+                <div class="class-box-methods">
+                  <div class="class-method">@KafkaListener</div>
+                  <div class="class-method">+ consumir(TelemetriaEvento): void</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;color:var(--green);font-size:18px;padding:0 4px">→</div>
+              <div class="class-box" style="border-top:2px solid var(--green)">
+                <div class="class-box-header" style="color:var(--green)">
+                  <span class="stereotype">@Entity</span> TelemetriaHistorico
+                </div>
+                <div class="class-box-fields">
+                  <div class="class-field"><span class="field-ann">🔑</span><span class="field-type">Long</span><span class="field-name">id</span></div>
+                  <div class="class-field"><span class="field-ann">   </span><span class="field-type">String</span><span class="field-name">maquinaId</span></div>
+                  <div class="class-field"><span class="field-ann">   </span><span class="field-type">Double</span><span class="field-name">temperatura</span></div>
+                  <div class="class-field"><span class="field-ann">   </span><span class="field-type">Double</span><span class="field-name">umidade</span></div>
+                  <div class="class-field"><span class="field-ann">   </span><span class="field-type">Instant</span><span class="field-name">recebidoEm</span></div>
+                </div>
+                <div class="class-box-methods"><div class="class-method" style="color:var(--muted)">// persistido no PG</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── MODELO DE DADOS KAFKA ── -->
+          <div class="arch-section">
+            <div class="diagram-title">🗃 Modelo relacional de dados — Projeto 02</div>
+            <div class="db-diagram">
+              <div class="db-table" style="border-top:2px solid var(--blue)">
+                <div class="db-table-header" style="color:var(--blue)"><span class="tbl-icon">📡</span>telemetria_historico</div>
+                <div class="db-col"><span class="col-key" style="color:#ffd700">🔑</span><span class="col-name">id</span><span class="col-type">BIGSERIAL</span><span class="col-constraint">PK</span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">maquina_id</span><span class="col-type">VARCHAR(20)</span><span class="col-constraint">NOT NULL · INDEX</span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">temperatura</span><span class="col-type">DOUBLE PRECISION</span><span class="col-constraint"></span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">umidade</span><span class="col-type">DOUBLE PRECISION</span><span class="col-constraint"></span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">recebido_em</span><span class="col-type">TIMESTAMPTZ</span><span class="col-constraint">NOT NULL · INDEX</span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">kafka_offset</span><span class="col-type">BIGINT</span><span class="col-constraint">para rastreio</span></div>
+              </div>
+              <div style="display:flex;align-items:center;flex-direction:column;gap:4px;padding:0 14px">
+                <span style="font-size:10px;font-family:monospace;color:var(--muted)">referência lógica</span>
+                <span style="color:var(--muted);font-size:18px">↔</span>
+                <span style="font-size:9px;font-family:monospace;color:var(--muted)">(sem FK — event-driven)</span>
+              </div>
+              <div class="db-table" style="border-top:2px solid var(--amber)">
+                <div class="db-table-header" style="color:var(--amber)"><span class="tbl-icon">⚙️</span>maquinas_ref <span style="font-size:8px;color:var(--muted)">(projeto 01)</span></div>
+                <div class="db-col"><span class="col-key" style="color:#ffd700">🔑</span><span class="col-name">id</span><span class="col-type">BIGSERIAL</span><span class="col-constraint">PK</span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">nome</span><span class="col-type">VARCHAR(100)</span><span class="col-constraint"></span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">modelo</span><span class="col-type">VARCHAR(100)</span><span class="col-constraint"></span></div>
+                <div class="db-col" style="opacity:.4"><span class="col-key"></span><span class="col-name">...</span><span class="col-type"></span></div>
+              </div>
+              <div style="display:flex;align-items:center;flex-direction:column;gap:4px;padding:0 14px">
+                <span style="font-size:10px;font-family:monospace;color:var(--muted)">tópico Kafka</span>
+                <span style="color:var(--red);font-size:18px">☠</span>
+              </div>
+              <div class="db-table" style="border-top:2px solid var(--red)">
+                <div class="db-table-header" style="color:var(--red)"><span class="tbl-icon">💀</span>maquinas-telemetria.DLT</div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">offset</span><span class="col-type">BIGINT</span><span class="col-constraint">Kafka offset</span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">payload_raw</span><span class="col-type">BYTES</span><span class="col-constraint">msg original</span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">exception</span><span class="col-type">STRING</span><span class="col-constraint">motivo da falha</span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">timestamp</span><span class="col-type">LONG</span><span class="col-constraint"></span></div>
+              </div>
+            </div>
+          </div>
+
+        </div></div>
+      </div>
+    </div>
+
+    <!-- 2.2 -->
+    <div class="step">
+      <div class="step-dot" style="border-color:var(--blue-mid)"></div>
+      <div class="step-inner">
+        <div class="step-head">
+          <span class="step-num">2.2</span>
+          <span class="step-title">Producer Service — simulação de máquinas</span>
+          <span class="step-duration">4–5 dias</span>
+          <span class="step-arrow">›</span>
+        </div>
+        <div class="step-body"><div class="sbg">
+          <div>
+            <div class="sub-label">O que fazer</div>
+            <ul class="checklist">
+              <li><span class="check-box"></span>Criar projeto Spring Boot: producer-service (porta 8081)</li>
+              <li><span class="check-box"></span>Adicionar dependência spring-kafka</li>
+              <li><span class="check-box"></span>Criar classe TelemetriaEvento (record ou DTO: maquinaId, temperatura, umidade, timestamp)</li>
+              <li><span class="check-box"></span>Criar MaquinaSimulator com @Scheduled(fixedDelay=5000)</li>
+              <li><span class="check-box"></span>Gerar dados aleatórios realistas (temperatura 15–45°C, umidade 30–90%)</li>
+              <li><span class="check-box"></span>Serializar para JSON com Jackson</li>
+              <li><span class="check-box"></span>Publicar no tópico com KafkaTemplate.send()</li>
+              <li><span class="check-box"></span>Simular 3 máquinas diferentes (maquinaId: MAQ-001 a MAQ-003)</li>
+              <li><span class="check-box"></span>Confirmar mensagens aparecendo no Kafdrop</li>
+            </ul>
+          </div>
+          <div>
+            <div class="sub-label">Ferramentas</div>
+            <div class="tools-list">
+              <div class="tool-item"><div class="tool-icon" style="background:#1a2a3a;color:#4da6ff">SK</div><div><div class="tool-name">Spring Kafka</div><div class="tool-use">KafkaTemplate para publicar</div></div></div>
+              <div class="tool-item"><div class="tool-icon" style="background:#1a3a2a;color:#00e5a0">JK</div><div><div class="tool-name">Jackson</div><div class="tool-use">Serialização objeto → JSON</div></div></div>
+              <div class="tool-item"><div class="tool-icon" style="background:#3a2a1a;color:#ffb84d">SC</div><div><div class="tool-name">@Scheduled</div><div class="tool-use">Disparo periódico automático</div></div></div>
+            </div>
+            <div class="folder-tree-wrap" style="margin-top:12px">
+              <div class="folder-tree" style="font-size:10.5px">
+<span class="ft-dir">producer-service/</span>
+├── <span class="ft-dir">src/main/java/com/solinfitec/producer/</span>
+│   ├── <span class="ft-file">ProducerApplication.java</span>
+│   ├── <span class="ft-dir">config/</span>
+│   │   └── <span class="ft-file">KafkaProducerConfig.java</span>  <span class="ft-ann">← ProducerFactory, KafkaTemplate</span>
+│   ├── <span class="ft-dir">dto/</span>
+│   │   └── <span class="ft-file">TelemetriaEvento.java</span>     <span class="ft-ann">← payload do evento</span>
+│   └── <span class="ft-dir">simulator/</span>
+│       ├── <span class="ft-file">MaquinaSimulator.java</span>     <span class="ft-ann">← @Scheduled, gera dados</span>
+│       └── <span class="ft-file">EventoProducer.java</span>       <span class="ft-ann">← KafkaTemplate.send()</span>
+└── <span class="ft-dir">src/main/resources/</span>
+    └── <span class="ft-file">application.yml</span>           <span class="ft-ann">← kafka.bootstrap-servers</span>
+              </div>
+            </div>
+          </div>
+          <div class="deliverable" style="border-left-color:var(--p2)">
+            <strong>✓ Entrega</strong>
+            Producer publicando eventos JSON a cada 5s no tópico. 3 máquinas simuladas. Mensagens visíveis no Kafdrop com payload correto.
+          </div>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- 2.3 -->
+    <div class="step">
+      <div class="step-dot" style="border-color:var(--blue-mid)"></div>
+      <div class="step-inner">
+        <div class="step-head">
+          <span class="step-num">2.3</span>
+          <span class="step-title">Consumer Service — processar, persistir, DLQ</span>
+          <span class="step-duration">5–6 dias</span>
+          <span class="step-arrow">›</span>
+        </div>
+        <div class="step-body"><div class="sbg">
+          <div>
+            <div class="sub-label">O que fazer</div>
+            <ul class="checklist">
+              <li><span class="check-box"></span>Criar projeto Spring Boot: consumer-service (porta 8082)</li>
+              <li><span class="check-box"></span>Criar EventoConsumer com @KafkaListener(topics = "maquinas-telemetria")</li>
+              <li><span class="check-box"></span>Criar entidade TelemetriaHistorico no PostgreSQL</li>
+              <li><span class="check-box"></span>Criar migration V1__create_telemetria.sql</li>
+              <li><span class="check-box"></span>Persistir cada evento recebido com timestamp</li>
+              <li><span class="check-box"></span>Criar GET /historico?maquinaId=MAQ-001 para consulta</li>
+              <li><span class="check-box"></span>Configurar Dead Letter Topic para erros de desserialização</li>
+              <li><span class="check-box"></span>Testar fluxo completo: producer → kafka → consumer → banco → API</li>
+            </ul>
+          </div>
+          <div>
+            <div class="sub-label">Ferramentas</div>
+            <div class="tools-list">
+              <div class="tool-item"><div class="tool-icon" style="background:#1a2a3a;color:#4da6ff">SK</div><div><div class="tool-name">Spring Kafka</div><div class="tool-use">@KafkaListener consumer</div></div></div>
+              <div class="tool-item"><div class="tool-icon" style="background:#1a3a2a;color:#00e5a0">PG</div><div><div class="tool-name">PostgreSQL</div><div class="tool-use">Persistir histórico de eventos</div></div></div>
+              <div class="tool-item"><div class="tool-icon" style="background:#3a1a1a;color:#ff6b6b">DLQ</div><div><div class="tool-name">Dead Letter Queue</div><div class="tool-use">Mensagens inválidas → tópico separado</div></div></div>
+            </div>
+            <div class="folder-tree-wrap" style="margin-top:12px">
+              <div class="folder-tree" style="font-size:10.5px">
+<span class="ft-dir">consumer-service/</span>
+├── <span class="ft-dir">src/main/java/com/solinfitec/consumer/</span>
+│   ├── <span class="ft-file">ConsumerApplication.java</span>
+│   ├── <span class="ft-dir">config/</span>
+│   │   └── <span class="ft-file">KafkaConsumerConfig.java</span>  <span class="ft-ann">← ConsumerFactory, DLT config</span>
+│   ├── <span class="ft-dir">consumer/</span>
+│   │   └── <span class="ft-file">EventoConsumer.java</span>       <span class="ft-ann">← @KafkaListener</span>
+│   ├── <span class="ft-dir">model/</span>
+│   │   └── <span class="ft-file">TelemetriaHistorico.java</span>  <span class="ft-ann">← @Entity</span>
+│   ├── <span class="ft-dir">repository/</span>
+│   │   └── <span class="ft-file">TelemetriaRepository.java</span>
+│   ├── <span class="ft-dir">service/</span>
+│   │   └── <span class="ft-file">TelemetriaService.java</span>    <span class="ft-ann">← salvar + consultar</span>
+│   └── <span class="ft-dir">controller/</span>
+│       └── <span class="ft-file">HistoricoController.java</span>  <span class="ft-ann">← GET /historico</span>
+└── <span class="ft-dir">src/main/resources/</span>
+    ├── <span class="ft-file">application.yml</span>
+    └── <span class="ft-dir">db/migration/</span>
+        └── <span class="ft-file">V1__create_telemetria.sql</span>
+              </div>
+            </div>
+          </div>
+          <div class="deliverable" style="border-left-color:var(--p2)">
+            <strong>✓ Entrega</strong>
+            Consumer persistindo eventos em tempo real. GET /historico retornando dados. DLT funcionando para mensagens corrompidas.
+          </div>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- 2.4 -->
+    <div class="step">
+      <div class="step-dot" style="border-color:var(--blue-mid)"></div>
+      <div class="step-inner">
+        <div class="step-head">
+          <span class="step-num">2.4</span>
+          <span class="step-title">Testes + Docker Compose unificado + README com diagrama</span>
+          <span class="step-duration">4–5 dias</span>
+          <span class="step-arrow">›</span>
+        </div>
+        <div class="step-body"><div class="sbg">
+          <div>
+            <div class="sub-label">Testes</div>
+            <ul class="checklist">
+              <li><span class="check-box"></span>Testar TelemetriaService com JUnit 5 + Mockito</li>
+              <li><span class="check-box"></span>Testar EventoConsumer com @EmbeddedKafka</li>
+              <li><span class="check-box"></span>Verificar que mensagem inválida vai para DLT</li>
+            </ul>
+            <div class="sub-label" style="margin-top:12px">Docker Compose final</div>
+            <ul class="checklist">
+              <li><span class="check-box"></span>Criar Dockerfile para producer-service</li>
+              <li><span class="check-box"></span>Criar Dockerfile para consumer-service</li>
+              <li><span class="check-box"></span>Unificar docker-compose.yml com: kafka, zookeeper, kafdrop, producer, consumer, postgres</li>
+              <li><span class="check-box"></span>Testar docker-compose up --build sobe tudo junto</li>
+              <li><span class="check-box"></span>Configurar depends_on e healthcheck</li>
+            </ul>
+          </div>
+          <div>
+            <div class="sub-label">README e diagrama</div>
+            <ul class="checklist">
+              <li><span class="check-box"></span>Criar diagrama de arquitetura no draw.io ou Excalidraw</li>
+              <li><span class="check-box"></span>Exportar como PNG e adicionar ao README</li>
+              <li><span class="check-box"></span>Documentar: como rodar, variáveis de ambiente, portas</li>
+            </ul>
+            <div class="folder-tree-wrap" style="margin-top:10px">
+              <div class="folder-tree" style="font-size:10.5px">
+<span class="ft-dir">telemetria-kafka/</span>          <span class="ft-ann">← raiz do monorepo</span>
+├── <span class="ft-dir">producer-service/</span>
+│   ├── <span class="ft-file">Dockerfile</span>
+│   └── <span class="ft-dir">src/...</span>
+├── <span class="ft-dir">consumer-service/</span>
+│   ├── <span class="ft-file">Dockerfile</span>
+│   └── <span class="ft-dir">src/...</span>
+├── <span class="ft-file">docker-compose.yml</span>        <span class="ft-ann2">← sobe tudo</span>
+└── <span class="ft-file">README.md</span>                 <span class="ft-ann2">← diagrama + instruções</span>
+              </div>
+            </div>
+          </div>
+          <div class="arch-flow full">
+            <span class="arch-node" style="background:var(--blue-dim);color:var(--p2);border-color:var(--blue-mid)">Simulator</span>
+            <span class="arch-arr">→</span>
+            <span class="arch-node" style="background:var(--blue-dim);color:var(--p2);border-color:var(--blue-mid)">Producer</span>
+            <span class="arch-arr">→</span>
+            <span class="arch-node" style="background:#185F9a;color:#fff;border-color:#185F9a">Apache Kafka</span>
+            <span class="arch-arr">→</span>
+            <span class="arch-node" style="background:var(--blue-dim);color:var(--p2);border-color:var(--blue-mid)">Consumer</span>
+            <span class="arch-arr">→</span>
+            <span class="arch-node" style="background:var(--blue-dim);color:var(--p2);border-color:var(--blue-mid)">PostgreSQL</span>
+            <span class="arch-arr">→</span>
+            <span class="arch-node" style="background:var(--blue-dim);color:var(--p2);border-color:var(--blue-mid)">GET /historico</span>
+          </div>
+          <div class="deliverable" style="border-left-color:var(--p2)">
+            <strong>✓ Entrega final — Projeto 02</strong>
+            Sistema completo sobe com um único "docker-compose up". README com diagrama PNG. Testes passando. GitHub organizado com commits semânticos.
+          </div>
+        </div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     PROJETO 03
+══════════════════════════════════════════════════ -->
+<section class="project-section" id="proj3">
+  <div class="project-header">
+    <div class="proj-number p3-color">03</div>
+    <div class="proj-meta">
+      <div class="proj-badge p3">Temático · Semanas 11–15</div>
+      <div class="proj-title">Dashboard Agro IoT</div>
+      <div class="proj-desc">API que ingere dados simulados de sensores IoT (temperatura, umidade, área colhida) via scheduler, expõe métricas analíticas por período e por máquina. Frontend React consome a API e exibe gráficos interativos em tempo real.</div>
+      <div class="proj-tags">
+        <span class="tag">Spring Scheduler</span><span class="tag">React + Vite</span><span class="tag">Recharts</span><span class="tag">Axios</span><span class="tag">JPQL Queries</span><span class="tag">Vercel</span><span class="tag">Railway</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-row"><span>Progresso</span><span id="prog3-txt">0%</span></div>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="prog3-bar" style="width:0%;background:var(--p3)"></div></div>
+  </div>
+
+  <div class="steps" id="steps-p3">
+
+    <!-- 3.1 -->
+    <div class="step">
+      <div class="step-dot" style="border-color:var(--amber-mid)"></div>
+      <div class="step-inner">
+        <div class="step-head">
+          <span class="step-num">3.1</span>
+          <span class="step-title">Backend — ingestão automática de sensores IoT</span>
+          <span class="step-duration">4–5 dias</span>
+          <span class="step-arrow">›</span>
+        </div>
+        <div class="step-body"><div class="sbg">
+          <div>
+            <div class="sub-label">O que fazer</div>
+            <ul class="checklist">
+              <li><span class="check-box"></span>Criar projeto Spring Boot: agro-backend (porta 8080)</li>
+              <li><span class="check-box"></span>Criar entidade SensorLeitura (id, maquinaId, temperatura, umidade, areaColhida, timestamp)</li>
+              <li><span class="check-box"></span>Criar migration V1__create_sensor_leituras.sql com índice no timestamp</li>
+              <li><span class="check-box"></span>Criar SensorSimulator com dados realistas por máquina</li>
+              <li><span class="check-box"></span>Configurar @Scheduled(fixedDelay=30000) para ingestão a cada 30s</li>
+              <li><span class="check-box"></span>Simular 5 máquinas: MAQ-001 a MAQ-005 com variações diferentes</li>
+              <li><span class="check-box"></span>Verificar acúmulo de dados no DBeaver</li>
+              <li><span class="check-box"></span>Habilitar @EnableScheduling na classe principal</li>
+            </ul>
+          </div>
+          <div>
+            <div class="sub-label">Ferramentas</div>
+            <div class="tools-list">
+              <div class="tool-item"><div class="tool-icon" style="background:#3a2a1a;color:#ffb84d">SC</div><div><div class="tool-name">Spring Scheduler</div><div class="tool-use">Ingestão automática periódica</div></div></div>
+              <div class="tool-item"><div class="tool-icon" style="background:#1a3a2a;color:#00e5a0">PG</div><div><div class="tool-name">PostgreSQL</div><div class="tool-use">Séries temporais de sensores</div></div></div>
+              <div class="tool-item"><div class="tool-icon" style="background:#1a2a3a;color:#4da6ff">DB</div><div><div class="tool-name">DBeaver</div><div class="tool-use">Monitorar dados em tempo real</div></div></div>
+            </div>
+          </div>
+          <div class="deliverable" style="border-left-color:var(--p3)">
+            <strong>✓ Entrega</strong>
+            Banco acumulando leituras a cada 30s. 5 máquinas com dados variados. Verificado no DBeaver com SELECT COUNT(*).
+          </div>
+
+          <!-- ── ARQUITETURA AGRO IOT ── -->
+          <div class="arch-section">
+            <div class="diagram-title">🏗 Arquitetura fullstack — Projeto 03</div>
+            <div class="arch-diagram">
+              <div class="arch-node-box">
+                <div class="arch-icon" style="background:#3a2a1a;border-color:#ffb84d40;color:#ffb84d">🌾</div>
+                <div class="arch-label">Sensor<br>Simulator</div>
+                <div class="arch-sublabel">@Scheduled 30s</div>
+              </div>
+              <div class="arch-arrow"><div class="arch-arrow-line"></div><div class="arch-arrow-label">salva</div></div>
+              <div class="arch-node-box">
+                <div class="arch-icon" style="background:#1a3a2a;border-color:#00e5a040;color:#00e5a0">🐘</div>
+                <div class="arch-label">PostgreSQL</div>
+                <div class="arch-sublabel">sensor_leituras</div>
+              </div>
+              <div class="arch-arrow"><div class="arch-arrow-line"></div><div class="arch-arrow-label">@Query</div></div>
+              <div class="arch-node-box">
+                <div class="arch-icon" style="background:#3a2a1a;border-color:#ffb84d40;color:#ffb84d">📊</div>
+                <div class="arch-label">Analytics<br>API</div>
+                <div class="arch-sublabel">Spring Boot 8080</div>
+              </div>
+              <div class="arch-arrow"><div class="arch-arrow-line"></div><div class="arch-arrow-label">JSON REST</div></div>
+              <div class="arch-node-box">
+                <div class="arch-icon" style="background:#1a2a3a;border-color:#4da6ff40;color:#4da6ff">⚛️</div>
+                <div class="arch-label">React<br>Frontend</div>
+                <div class="arch-sublabel">Vite + Recharts</div>
+              </div>
+              <div class="arch-arrow"><div class="arch-arrow-line"></div><div class="arch-arrow-label">Vercel</div></div>
+              <div class="arch-node-box">
+                <div class="arch-icon" style="background:#1a1a3a;border-color:#7c3aed40;color:#a78bfa">🌐</div>
+                <div class="arch-label">Usuário<br>Final</div>
+                <div class="arch-sublabel">dashboard ao vivo</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── DIAGRAMA DE CLASSES IOT ── -->
+          <div class="arch-section">
+            <div class="diagram-title">🧩 Diagrama de classes — Projeto 03</div>
+            <div class="class-diagram">
+              <div class="class-box" style="border-top:2px solid var(--amber)">
+                <div class="class-box-header" style="color:var(--amber)">
+                  <span class="stereotype">@Entity</span> SensorLeitura
+                </div>
+                <div class="class-box-fields">
+                  <div class="class-field"><span class="field-ann">🔑</span><span class="field-type">Long</span><span class="field-name">id</span></div>
+                  <div class="class-field"><span class="field-ann">   </span><span class="field-type">String</span><span class="field-name">maquinaId</span></div>
+                  <div class="class-field"><span class="field-ann">   </span><span class="field-type">Double</span><span class="field-name">temperatura</span></div>
+                  <div class="class-field"><span class="field-ann">   </span><span class="field-type">Double</span><span class="field-name">umidade</span></div>
+                  <div class="class-field"><span class="field-ann">   </span><span class="field-type">Double</span><span class="field-name">areaColhida</span></div>
+                  <div class="class-field"><span class="field-ann">   </span><span class="field-type">Instant</span><span class="field-name">timestamp</span></div>
+                </div>
+                <div class="class-box-methods"><div class="class-method" style="color:var(--muted)">// @Index(timestamp)</div></div>
+              </div>
+              <div style="display:flex;align-items:center;color:var(--amber);font-size:18px;padding:0 4px">←</div>
+              <div class="class-box" style="border-top:2px solid var(--amber)">
+                <div class="class-box-header" style="color:var(--amber)">
+                  <span class="stereotype">@Repository</span> SensorLeituraRepository
+                </div>
+                <div class="class-box-fields">
+                  <div class="class-field"><span class="field-ann">   </span><span class="field-type">extends</span><span class="field-name">JpaRepository</span></div>
+                </div>
+                <div class="class-box-methods">
+                  <div class="class-method">@Query avgTempPorMaquina()</div>
+                  <div class="class-method">@Query serieTemporalPorPeriodo()</div>
+                  <div class="class-method">@Query resumoPorMaquina()</div>
+                  <div class="class-method">@Query totalAreaColhida()</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;color:var(--green);font-size:18px;padding:0 4px">←</div>
+              <div class="class-box" style="border-top:2px solid var(--green)">
+                <div class="class-box-header" style="color:var(--green)">
+                  <span class="stereotype">@Component</span> SensorSimulator
+                </div>
+                <div class="class-box-fields">
+                  <div class="class-field"><span class="field-ann">   </span><span class="field-type">SensorLeituraRepository</span><span class="field-name">repo</span></div>
+                  <div class="class-field"><span class="field-ann">   </span><span class="field-type">String[]</span><span class="field-name">maquinas</span></div>
+                </div>
+                <div class="class-box-methods">
+                  <div class="class-method">@Scheduled(30s)</div>
+                  <div class="class-method">+ gerarLeituras(): void</div>
+                  <div class="class-method">- valorAleatorio(min,max): Double</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;color:var(--blue);font-size:18px;padding:0 4px">→</div>
+              <div class="class-box" style="border-top:2px solid var(--blue)">
+                <div class="class-box-header" style="color:var(--blue)">
+                  <span class="stereotype">record</span> MetricaResponseDTO
+                </div>
+                <div class="class-box-fields">
+                  <div class="class-field"><span class="field-ann">   </span><span class="field-type">String</span><span class="field-name">maquinaId</span></div>
+                  <div class="class-field"><span class="field-ann">   </span><span class="field-type">Double</span><span class="field-name">avgTemperatura</span></div>
+                  <div class="class-field"><span class="field-ann">   </span><span class="field-type">Double</span><span class="field-name">maxUmidade</span></div>
+                  <div class="class-field"><span class="field-ann">   </span><span class="field-type">Double</span><span class="field-name">totalAreaColhida</span></div>
+                  <div class="class-field"><span class="field-ann">   </span><span class="field-type">Instant</span><span class="field-name">periodo</span></div>
+                </div>
+                <div class="class-box-methods"><div class="class-method" style="color:var(--muted)">// resposta da API</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── MODELO DE DADOS IOT ── -->
+          <div class="arch-section">
+            <div class="diagram-title">🗃 Modelo relacional de dados — Projeto 03</div>
+            <div class="db-diagram">
+              <div class="db-table" style="border-top:2px solid var(--amber)">
+                <div class="db-table-header" style="color:var(--amber)"><span class="tbl-icon">📡</span>sensor_leituras</div>
+                <div class="db-col"><span class="col-key" style="color:#ffd700">🔑</span><span class="col-name">id</span><span class="col-type">BIGSERIAL</span><span class="col-constraint">PK</span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">maquina_id</span><span class="col-type">VARCHAR(20)</span><span class="col-constraint">NOT NULL</span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">temperatura</span><span class="col-type">FLOAT8</span><span class="col-constraint">CHECK (15..50)</span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">umidade</span><span class="col-type">FLOAT8</span><span class="col-constraint">CHECK (0..100)</span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">area_colhida_ha</span><span class="col-type">FLOAT8</span><span class="col-constraint"></span></div>
+                <div class="db-col"><span class="col-key" style="color:#a78bfa">⏱</span><span class="col-name">timestamp</span><span class="col-type">TIMESTAMPTZ</span><span class="col-constraint">INDEX · NOT NULL</span></div>
+              </div>
+              <div style="display:flex;align-items:center;flex-direction:column;gap:4px;padding:0 14px">
+                <span style="font-size:10px;font-family:monospace;color:var(--muted)">query analítica</span>
+                <span style="color:var(--amber);font-size:18px">→</span>
+              </div>
+              <div class="db-table" style="border-top:2px solid var(--green)">
+                <div class="db-table-header" style="color:var(--green)"><span class="tbl-icon">📊</span>view: metricas_por_maquina</div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">maquina_id</span><span class="col-type">VARCHAR</span><span class="col-constraint">GROUP BY</span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">avg_temperatura</span><span class="col-type">FLOAT8</span><span class="col-constraint">AVG()</span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">max_umidade</span><span class="col-type">FLOAT8</span><span class="col-constraint">MAX()</span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">min_temperatura</span><span class="col-type">FLOAT8</span><span class="col-constraint">MIN()</span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">total_area_ha</span><span class="col-type">FLOAT8</span><span class="col-constraint">SUM()</span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">total_leituras</span><span class="col-type">BIGINT</span><span class="col-constraint">COUNT(*)</span></div>
+              </div>
+              <div style="display:flex;align-items:center;flex-direction:column;gap:4px;padding:0 14px">
+                <span style="font-size:10px;font-family:monospace;color:var(--muted)">série temporal</span>
+                <span style="color:var(--blue);font-size:18px">→</span>
+              </div>
+              <div class="db-table" style="border-top:2px solid var(--blue)">
+                <div class="db-table-header" style="color:var(--blue)"><span class="tbl-icon">📈</span>view: serie_temporal</div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">hora</span><span class="col-type">TIMESTAMPTZ</span><span class="col-constraint">DATE_TRUNC</span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">maquina_id</span><span class="col-type">VARCHAR</span><span class="col-constraint"></span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">avg_temp</span><span class="col-type">FLOAT8</span><span class="col-constraint">AVG()</span></div>
+                <div class="db-col"><span class="col-key"></span><span class="col-name">avg_umidade</span><span class="col-type">FLOAT8</span><span class="col-constraint">AVG()</span></div>
+                <div class="db-col" style="opacity:.6"><span class="col-key"></span><span class="col-name">→ Recharts no frontend</span><span class="col-type"></span></div>
+              </div>
+            </div>
+          </div>
+
+        </div></div>
+      </div>
+    </div>
+
+    <!-- 3.2 -->
+    <div class="step">
+      <div class="step-dot" style="border-color:var(--amber-mid)"></div>
+      <div class="step-inner">
+        <div class="step-head">
+          <span class="step-num">3.2</span>
+          <span class="step-title">API analítica — endpoints de métricas por período</span>
+          <span class="step-duration">4–5 dias</span>
+          <span class="step-arrow">›</span>
+        </div>
+        <div class="step-body"><div class="sbg">
+          <div>
+            <div class="sub-label">O que fazer</div>
+            <ul class="checklist">
+              <li><span class="check-box"></span>GET /metricas/temperatura?maquinaId=&inicio=&fim= (série temporal)</li>
+              <li><span class="check-box"></span>GET /metricas/umidade?maquinaId=&inicio=&fim=</li>
+              <li><span class="check-box"></span>GET /metricas/resumo — retorna avg/max/min por máquina</li>
+              <li><span class="check-box"></span>GET /relatorio/area-colhida?periodo=dia|semana|mes</li>
+              <li><span class="check-box"></span>Usar @Query JPQL com AVG(), MAX(), MIN(), GROUP BY</li>
+              <li><span class="check-box"></span>Configurar CORS: @CrossOrigin ou WebMvcConfigurer</li>
+              <li><span class="check-box"></span>Testar todos os endpoints no Postman</li>
+              <li><span class="check-box"></span>Adicionar Swagger com @Operation em cada endpoint</li>
+            </ul>
+          </div>
+          <div>
+            <div class="sub-label">Ferramentas</div>
+            <div class="tools-list">
+              <div class="tool-item"><div class="tool-icon" style="background:#3a2a1a;color:#ffb84d">JQ</div><div><div class="tool-name">@Query JPQL</div><div class="tool-use">Agregações AVG, MAX, MIN</div></div></div>
+              <div class="tool-item"><div class="tool-icon" style="background:#3a1a2a;color:#ff6b9d">PM</div><div><div class="tool-name">Postman</div><div class="tool-use">Validar todos os filtros</div></div></div>
+              <div class="tool-item"><div class="tool-icon" style="background:#1a2a3a;color:#4da6ff">CO</div><div><div class="tool-name">CORS Config</div><div class="tool-use">Liberar frontend para consumir</div></div></div>
+            </div>
+            <div class="warn-box" style="margin-top:10px">
+              <strong>⚠ Erro clássico</strong>
+              CORS bloqueado é o erro mais comum ao conectar React ao Spring. Configure antes de começar o frontend para não perder tempo debugando depois.
+            </div>
+          </div>
+          <div class="deliverable" style="border-left-color:var(--p3)">
+            <strong>✓ Entrega</strong>
+            4 endpoints analíticos funcionando. CORS configurado. Swagger documentando os parâmetros de filtro.
+          </div>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- 3.3 -->
+    <div class="step">
+      <div class="step-dot" style="border-color:var(--amber-mid)"></div>
+      <div class="step-inner">
+        <div class="step-head">
+          <span class="step-num">3.3</span>
+          <span class="step-title">Frontend React — componentes, estado e gráficos</span>
+          <span class="step-duration">6–7 dias</span>
+          <span class="step-arrow">›</span>
+        </div>
+        <div class="step-body"><div class="sbg">
+          <div>
+            <div class="sub-label">Configuração inicial</div>
+            <ul class="checklist">
+              <li><span class="check-box"></span>Criar projeto: npm create vite@latest agro-frontend -- --template react</li>
+              <li><span class="check-box"></span>Instalar: npm install recharts axios</li>
+              <li><span class="check-box"></span>Criar .env com VITE_API_URL=http://localhost:8080</li>
+              <li><span class="check-box"></span>Criar api/sensorApi.js centralizando chamadas Axios</li>
+            </ul>
+            <div class="sub-label" style="margin-top:10px">Componentes e estado</div>
+            <ul class="checklist">
+              <li><span class="check-box"></span>Criar CardMetrica.jsx — mostra avg/max/min por máquina</li>
+              <li><span class="check-box"></span>Criar GraficoTemperatura.jsx — LineChart com Recharts</li>
+              <li><span class="check-box"></span>Criar GraficoUmidade.jsx — AreaChart com Recharts</li>
+              <li><span class="check-box"></span>Usar useState para filtro (maquinaId, período)</li>
+              <li><span class="check-box"></span>Usar useEffect para buscar dados quando filtro muda</li>
+              <li><span class="check-box"></span>Adicionar loading state e tratamento de erro no fetch</li>
+              <li><span class="check-box"></span>Select de máquina + select de período (dia/semana/mês)</li>
+              <li><span class="check-box"></span>Testar gráficos atualizando ao trocar filtro</li>
+            </ul>
+          </div>
+          <div>
+            <div class="sub-label">Ferramentas</div>
+            <div class="tools-list">
+              <div class="tool-item"><div class="tool-icon" style="background:#1a2a3a;color:#4da6ff">R</div><div><div class="tool-name">React 18 + Vite</div><div class="tool-use">Frontend com HMR rápido</div></div></div>
+              <div class="tool-item"><div class="tool-icon" style="background:#1a3a2a;color:#00e5a0">RC</div><div><div class="tool-name">Recharts</div><div class="tool-use">LineChart, AreaChart, Tooltip</div></div></div>
+              <div class="tool-item"><div class="tool-icon" style="background:#3a2a1a;color:#ffb84d">AX</div><div><div class="tool-name">Axios</div><div class="tool-use">HTTP client com interceptors</div></div></div>
+            </div>
+            <div class="folder-tree-wrap" style="margin-top:12px">
+              <div class="folder-tree" style="font-size:10.5px">
+<span class="ft-dir">agro-frontend/</span>
+├── <span class="ft-dir">src/</span>
+│   ├── <span class="ft-dir">api/</span>
+│   │   └── <span class="ft-file">sensorApi.js</span>        <span class="ft-ann">← funções Axios centralizadas</span>
+│   ├── <span class="ft-dir">components/</span>
+│   │   ├── <span class="ft-file">CardMetrica.jsx</span>     <span class="ft-ann3">← avg/max/min por máquina</span>
+│   │   ├── <span class="ft-file">GraficoTemp.jsx</span>     <span class="ft-ann3">← Recharts LineChart</span>
+│   │   ├── <span class="ft-file">GraficoUmidade.jsx</span>  <span class="ft-ann3">← Recharts AreaChart</span>
+│   │   └── <span class="ft-file">FiltroMaquina.jsx</span>   <span class="ft-ann3">← select + período</span>
+│   ├── <span class="ft-file">App.jsx</span>               <span class="ft-ann">← useState, useEffect, layout</span>
+│   └── <span class="ft-file">main.jsx</span>
+├── <span class="ft-file">.env</span>                      <span class="ft-ann">← VITE_API_URL</span>
+├── <span class="ft-file">.env.production</span>          <span class="ft-ann">← URL da API em produção</span>
+└── <span class="ft-file">package.json</span>
+              </div>
+            </div>
+          </div>
+          <div class="deliverable" style="border-left-color:var(--p3)">
+            <strong>✓ Entrega</strong>
+            Dashboard com 2 gráficos e cards de métricas consumindo a API real. Filtros por máquina e período funcionando. Loading e erros tratados.
+          </div>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- 3.4 -->
+    <div class="step">
+      <div class="step-dot" style="border-color:var(--amber-mid)"></div>
+      <div class="step-inner">
+        <div class="step-head">
+          <span class="step-num">3.4</span>
+          <span class="step-title">Testes + deploy full-stack + portfólio final</span>
+          <span class="step-duration">5–6 dias</span>
+          <span class="step-arrow">›</span>
+        </div>
+        <div class="step-body"><div class="sbg">
+          <div>
+            <div class="sub-label">Testes backend</div>
+            <ul class="checklist">
+              <li><span class="check-box"></span>Testar MetricasService com JUnit 5 + Mockito</li>
+              <li><span class="check-box"></span>Testar SensorSimulator: verifica que dados são salvos</li>
+              <li><span class="check-box"></span>Testar endpoint /metricas/resumo com @WebMvcTest</li>
+            </ul>
+            <div class="sub-label" style="margin-top:10px">Deploy</div>
+            <ul class="checklist">
+              <li><span class="check-box"></span>Criar conta no Railway e fazer deploy do backend + PostgreSQL</li>
+              <li><span class="check-box"></span>Configurar variáveis de ambiente no Railway</li>
+              <li><span class="check-box"></span>Atualizar .env.production com URL do Railway</li>
+              <li><span class="check-box"></span>npm run build e deploy no Vercel (conectar ao GitHub)</li>
+              <li><span class="check-box"></span>Testar sistema completo em produção pelo celular</li>
+            </ul>
+          </div>
+          <div>
+            <div class="sub-label">Portfólio final</div>
+            <ul class="checklist">
+              <li><span class="check-box"></span>Gravar GIF do dashboard funcionando (use ScreenToGif ou LICEcap)</li>
+              <li><span class="check-box"></span>Escrever README com: GIF, arquitetura, como rodar, link da URL pública</li>
+              <li><span class="check-box"></span>Revisar README dos 3 projetos — todos com URL pública</li>
+              <li><span class="check-box"></span>Organizar GitHub: photo de perfil, bio, repositórios fixados</li>
+              <li><span class="check-box"></span>Publicar no LinkedIn com link do GitHub e o que aprendeu</li>
+              <li><span class="check-box"></span>Atualizar currículo com os 3 projetos e as tecnologias</li>
+            </ul>
+          </div>
+          <div class="folder-tree-wrap full">
+            <div class="ft-title">Estrutura final — Projeto 03 completo</div>
+            <div class="folder-tree">
+<span class="ft-dir">agro-dashboard/</span>
+├── <span class="ft-dir">agro-backend/</span>
+│   ├── <span class="ft-dir">src/main/java/com/solinfitec/agro/</span>
+│   │   ├── <span class="ft-dir">controller/</span>
+│   │   │   ├── <span class="ft-file">MetricasController.java</span>   <span class="ft-ann">← endpoints analíticos</span>
+│   │   │   └── <span class="ft-file">RelatorioController.java</span>  <span class="ft-ann">← /relatorio/area-colhida</span>
+│   │   ├── <span class="ft-dir">service/</span>
+│   │   │   ├── <span class="ft-file">MetricasService.java</span>      <span class="ft-ann">← lógica de agregação</span>
+│   │   │   └── <span class="ft-file">SensorSimulator.java</span>     <span class="ft-ann3">← @Scheduled, gera dados</span>
+│   │   ├── <span class="ft-dir">repository/</span>
+│   │   │   └── <span class="ft-file">SensorLeituraRepository.java</span> <span class="ft-ann">← @Query JPQL</span>
+│   │   ├── <span class="ft-dir">model/</span>
+│   │   │   └── <span class="ft-file">SensorLeitura.java</span>
+│   │   ├── <span class="ft-dir">dto/</span>
+│   │   │   ├── <span class="ft-file">MetricaResponseDTO.java</span>
+│   │   │   └── <span class="ft-file">ResumoMaquinaDTO.java</span>
+│   │   └── <span class="ft-dir">config/</span>
+│   │       └── <span class="ft-file">CorsConfig.java</span>          <span class="ft-ann2">← libera o frontend</span>
+│   ├── <span class="ft-file">Dockerfile</span>
+│   └── <span class="ft-dir">src/main/resources/</span>
+│       ├── <span class="ft-file">application.yml</span>
+│       └── <span class="ft-dir">db/migration/</span>
+│           └── <span class="ft-file">V1__create_sensor_leituras.sql</span>
+├── <span class="ft-dir">agro-frontend/</span>
+│   ├── <span class="ft-dir">src/</span>
+│   │   ├── <span class="ft-dir">api/</span>
+│   │   │   └── <span class="ft-file">sensorApi.js</span>
+│   │   ├── <span class="ft-dir">components/</span>
+│   │   │   ├── <span class="ft-file">CardMetrica.jsx</span>
+│   │   │   ├── <span class="ft-file">GraficoTemperatura.jsx</span>
+│   │   │   ├── <span class="ft-file">GraficoUmidade.jsx</span>
+│   │   │   └── <span class="ft-file">FiltroMaquina.jsx</span>
+│   │   └── <span class="ft-file">App.jsx</span>
+│   ├── <span class="ft-file">.env</span>                        <span class="ft-ann">← dev: localhost:8080</span>
+│   └── <span class="ft-file">.env.production</span>             <span class="ft-ann">← prod: URL Railway</span>
+├── <span class="ft-file">docker-compose.yml</span>           <span class="ft-ann2">← backend + postgres local</span>
+└── <span class="ft-file">README.md</span>                    <span class="ft-ann2">← GIF + links + arquitetura</span>
+            </div>
+          </div>
+          <div class="deliverable" style="border-left-color:var(--p3)">
+            <strong>✓ Entrega final — Portfólio completo para Solinfitec</strong>
+            3 projetos públicos no GitHub com README, GIFs e URLs. Dashboard ao vivo no Vercel. Perfil LinkedIn atualizado. Pronto para entrevista.
+          </div>
+        </div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SEÇÃO DE ANOTAÇÕES — ESTILO ANKI
+══════════════════════════════════════════════════ -->
+<section id="anotacoes" style="padding:0 48px 80px">
+
+  <div style="border-top:1px solid var(--border);padding-top:40px;margin-bottom:32px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px">
+    <div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:8px">Caderno de estudo</div>
+      <h2 style="font-size:clamp(18px,2.5vw,28px);font-weight:700;letter-spacing:-.5px">Anotações & Revisão</h2>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap" id="anki-tabs">
+      <button class="anki-tab active" data-tab="notas">✏ Anotações</button>
+      <button class="anki-tab" data-tab="flashcards">🃏 Flashcards</button>
+      <button class="anki-tab" data-tab="duvidas">❓ Dúvidas</button>
+      <button class="anki-tab" data-tab="glossario">📖 Glossário</button>
+    </div>
+  </div>
+
+  <!-- ── ABA ANOTAÇÕES ── -->
+  <div class="anki-pane active" id="apane-notas">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+      <div>
+        <div class="anki-sublabel">Nova anotação</div>
+        <input id="an-title" class="anki-input" placeholder="Título (ex: Entendi como JWT funciona)">
+        <div style="display:flex;gap:6px;margin-bottom:8px">
+          <select id="an-tag" class="anki-select">
+            <option value="descoberta">💡 Descoberta</option>
+            <option value="importante">⚠ Importante</option>
+            <option value="revisao">🔁 Revisar</option>
+            <option value="erro">🐛 Erro comum</option>
+          </select>
+          <select id="an-proj" class="anki-select">
+            <option value="geral">Geral</option>
+            <option value="proj1">Projeto 01</option>
+            <option value="proj2">Projeto 02</option>
+            <option value="proj3">Projeto 03</option>
+          </select>
+        </div>
+        <textarea id="an-body" class="anki-textarea" placeholder="O que você aprendeu? Qual erro cometeu? Qual insight teve?&#10;&#10;Ex: O SecurityFilterChain substituiu o WebSecurityConfigurerAdapter no Spring 6. Se usar a API antiga vai dar erro de configuração."></textarea>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:8px">
+          <button class="anki-btn-primary" data-action="save-anota">💾 Salvar</button>
+          <span id="an-status" style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--green);opacity:0;transition:opacity .3s"></span>
+        </div>
+      </div>
+      <div>
+        <div class="anki-sublabel">Anotações salvas (<span id="an-count">0</span>)</div>
+        <div id="an-list" style="max-height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:8px"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ABA FLASHCARDS ── -->
+  <div class="anki-pane" id="apane-flashcards">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+      <div>
+        <div class="anki-sublabel">Criar flashcard</div>
+        <input id="fc-front" class="anki-input" placeholder="Pergunta (frente do card)">
+        <textarea id="fc-back" class="anki-textarea" style="min-height:100px" placeholder="Resposta (verso do card)"></textarea>
+        <select id="fc-proj" class="anki-select" style="margin-bottom:8px">
+          <option value="geral">Geral</option>
+          <option value="proj1">Projeto 01 — API REST</option>
+          <option value="proj2">Projeto 02 — Kafka</option>
+          <option value="proj3">Projeto 03 — Dashboard</option>
+        </select>
+        <button class="anki-btn-primary" data-action="save-fc">➕ Adicionar card</button>
+      </div>
+      <div>
+        <div class="anki-sublabel">Sessão de revisão</div>
+        <div id="fc-deck-info" style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:12px"></div>
+        <div id="fc-card" style="min-height:160px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:pointer;transition:border-color .2s" data-action="flip-card">
+          <div id="fc-front-txt" style="font-size:15px;font-weight:600;line-height:1.5"></div>
+          <div id="fc-back-txt" style="display:none;margin-top:16px;font-size:13px;color:var(--muted);line-height:1.6;border-top:1px solid var(--border);padding-top:16px;width:100%"></div>
+          <div id="fc-hint" style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);margin-top:12px;opacity:.6">clique para ver a resposta</div>
+        </div>
+        <div id="fc-actions" style="display:none;margin-top:12px;gap:8px;flex-wrap:wrap">
+          <button class="anki-btn-green" data-action="rate-card" data-rate="facil">😊 Fácil</button>
+          <button class="anki-btn-amber" data-action="rate-card" data-rate="dificil">😅 Difícil</button>
+          <button class="anki-btn-red" data-action="rate-card" data-rate="errei">😬 Errei</button>
+          <button class="anki-btn-muted" data-action="skip-card">⏭ Pular</button>
+        </div>
+        <div id="fc-stats" style="margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted)"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ABA DÚVIDAS ── -->
+  <div class="anki-pane" id="apane-duvidas">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+      <div>
+        <div class="anki-sublabel">Registrar dúvida</div>
+        <textarea id="dv-body" class="anki-textarea" style="min-height:100px" placeholder="Ex: Qual a diferença entre @Component e @Bean? Quando usar cada um?"></textarea>
+        <select id="dv-proj" class="anki-select" style="margin-bottom:8px">
+          <option value="geral">Geral</option>
+          <option value="proj1">Projeto 01</option>
+          <option value="proj2">Projeto 02</option>
+          <option value="proj3">Projeto 03</option>
+        </select>
+        <button class="anki-btn-primary" data-action="save-dv">📌 Registrar</button>
+      </div>
+      <div>
+        <div class="anki-sublabel">Em aberto (<span id="dv-open-count">0</span>)</div>
+        <div id="dv-list" style="max-height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:6px"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ABA GLOSSÁRIO ── -->
+  <div class="anki-pane" id="apane-glossario">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+      <div>
+        <div class="anki-sublabel">Novo termo</div>
+        <input id="gls-term" class="anki-input" placeholder="Termo (ex: Dead Letter Queue)">
+        <textarea id="gls-def" class="anki-textarea" style="min-height:100px" placeholder="Definição com suas palavras..."></textarea>
+        <button class="anki-btn-primary" data-action="save-gls">📖 Adicionar</button>
+      </div>
+      <div>
+        <div class="anki-sublabel">Termos (<span id="gls-count">0</span>)</div>
+        <div id="gls-list" style="max-height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:6px"></div>
+      </div>
+    </div>
+  </div>
+
+</section>
+ </main>
+
+<footer>
+  <div class="footer-txt">
+    <span style="color:var(--green)">●</span> Projeto 01 · API REST &nbsp;
+    <span style="color:var(--blue)">●</span> Projeto 02 · Kafka &nbsp;
+    <span style="color:var(--amber)">●</span> Projeto 03 · Dashboard IoT &nbsp;
+    <span style="color:var(--muted)">●</span> Anotações
+  </div>
+  <div class="footer-txt">Clique nas etapas · Marque as tarefas · Progresso salvo automaticamente</div>
+</footer>
+
+<script>
+  window.CRONOGRAMA_API_BASE_URL = window.CRONOGRAMA_API_BASE_URL || "";
+</script>
+<script src="./assets/js/app.js" defer></script>
+<script type="application/json">
+function toggle(el){
+  el.classList.toggle('open');
+  updateAllProgress();
+}
+
+function chk(e, li){
+  e.stopPropagation();
+  li.classList.toggle('done');
+  li.querySelector('.check-box').textContent = li.classList.contains('done') ? '✓' : '';
+  saveState();
+  updateAllProgress();
+}
+
+function updateAllProgress(){
+  [['p1',1],['p2',2],['p3',3]].forEach(([pid,n])=>{
+    const sec = document.getElementById('steps-'+pid);
+    if(!sec) return;
+    const all = sec.querySelectorAll('.checklist li').length;
+    const done = sec.querySelectorAll('.checklist li.done').length;
+    const pct = all ? Math.round(done/all*100) : 0;
+    const bar = document.getElementById('prog'+n+'-bar');
+    const txt = document.getElementById('prog'+n+'-txt');
+    if(bar) bar.style.width = pct+'%';
+    if(txt) txt.textContent = pct+'%';
+  });
+}
+
+function saveState(){
+  const state = {};
+  document.querySelectorAll('.checklist li').forEach((li,i)=>{ state[i]=li.classList.contains('done'); });
+  try{ localStorage.setItem('soli-v2', JSON.stringify(state)); }catch(e){}
+}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  try{
+    const saved = JSON.parse(localStorage.getItem('soli-v2')||'{}');
+    document.querySelectorAll('.checklist li').forEach((li,i)=>{
+      if(saved[i]){
+        li.classList.add('done');
+        li.querySelector('.check-box').textContent='✓';
+      }
+    });
+  }catch(e){}
+  updateAllProgress();
+  initAnki();
+});
+
+/* ══════════════════════════════════════════
+   ANKI — Anotações, Flashcards, Dúvidas, Glossário
+══════════════════════════════════════════ */
+const AK = {
+  notas: 'soli-anki-notas',
+  fc: 'soli-anki-fc',
+  dv: 'soli-anki-dv',
+  gls: 'soli-anki-gls'
+};
+const projLabels = {geral:'Geral',proj1:'Proj 01',proj2:'Proj 02',proj3:'Proj 03'};
+const tagEmoji = {descoberta:'💡',importante:'⚠',revisao:'🔁',erro:'🐛'};
+
+function akLoad(k){ try{return JSON.parse(localStorage.getItem(k)||'[]')}catch(e){return []} }
+function akSave(k,v){ try{localStorage.setItem(k,JSON.stringify(v))}catch(e){} }
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') }
+
+function ankiTab(btn, tab){
+  document.querySelectorAll('.anki-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.anki-pane').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('apane-'+tab).classList.add('active');
+  if(tab==='flashcards') initDeck();
+}
+
+/* ── ANOTAÇÕES ── */
+function saveAnota(){
+  const title = document.getElementById('an-title').value.trim();
+  const body = document.getElementById('an-body').value.trim();
+  if(!body) return;
+  const tag = document.getElementById('an-tag').value;
+  const proj = document.getElementById('an-proj').value;
+  const notas = akLoad(AK.notas);
+  notas.unshift({id:Date.now(), title, body, tag, proj,
+    date: new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})});
+  akSave(AK.notas, notas);
+  document.getElementById('an-title').value='';
+  document.getElementById('an-body').value='';
+  const s = document.getElementById('an-status');
+  s.style.opacity='1'; s.textContent='✓ Salvo!';
+  setTimeout(()=>s.style.opacity='0', 1800);
+  renderNotas();
+}
+
+function deleteAnota(id){
+  akSave(AK.notas, akLoad(AK.notas).filter(n=>n.id!==id));
+  renderNotas();
+}
+
+function renderNotas(){
+  const notas = akLoad(AK.notas);
+  document.getElementById('an-count').textContent = notas.length;
+  const el = document.getElementById('an-list');
+  if(!notas.length){
+    el.innerHTML='<div style="font-family:\'IBM Plex Mono\',monospace;font-size:11px;color:var(--muted);text-align:center;padding:32px 0;opacity:.6">Nenhuma anotação ainda</div>';
+    return;
+  }
+  el.innerHTML = notas.map(n=>`
+    <div class="anki-card">
+      <div class="ac-head">
+        <div class="ac-title">${esc(n.title||n.body.slice(0,60))}</div>
+        <button class="anki-del" title="Remover">✕</button>
+      </div>
+      ${n.title ? `<div class="ac-body">${esc(n.body)}</div>` : ''}
+      <div class="ac-meta">
+        <span class="anki-badge ${n.tag}">${tagEmoji[n.tag]||''} ${n.tag}</span>
+        <span class="anki-badge proj">${projLabels[n.proj]||n.proj}</span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--muted);margin-left:auto">${n.date||''}</span>
+      </div>
+    </div>`).join('');
+}
+
+/* ── FLASHCARDS ── */
+let fcDeck = [], fcIdx = 0, fcFlipped = false, fcSession = {facil:0,dificil:0,errei:0};
+
+function saveFC(){
+  const front = document.getElementById('fc-front').value.trim();
+  const back = document.getElementById('fc-back').value.trim();
+  if(!front||!back) return;
+  const proj = document.getElementById('fc-proj').value;
+  const cards = akLoad(AK.fc);
+  cards.push({id:Date.now(), front, back, proj, score:0});
+  akSave(AK.fc, cards);
+  document.getElementById('fc-front').value='';
+  document.getElementById('fc-back').value='';
+  initDeck();
+}
+
+function initDeck(){
+  const cards = akLoad(AK.fc);
+  fcDeck = [...cards].sort(()=>Math.random()-.5);
+  fcIdx = 0; fcFlipped = false;
+  fcSession = {facil:0,dificil:0,errei:0};
+  showCard();
+}
+
+function showCard(){
+  const frontEl = document.getElementById('fc-front-txt');
+  const backEl = document.getElementById('fc-back-txt');
+  const hint = document.getElementById('fc-hint');
+  const actions = document.getElementById('fc-actions');
+  const info = document.getElementById('fc-deck-info');
+  const stats = document.getElementById('fc-stats');
+
+  if(!fcDeck.length){
+    frontEl.innerHTML='<div class="fc-empty">Nenhum flashcard ainda.<br>Crie cards ao lado!</div>';
+    backEl.style.display='none';
+    hint.style.display='none';
+    actions.style.display='none';
+    info.textContent='';
+    return;
+  }
+  if(fcIdx >= fcDeck.length){
+    frontEl.innerHTML=`<div style="font-size:13px;text-align:center"><div style="font-size:24px;margin-bottom:8px">🎉</div>Rodada concluída!<br><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted)">${fcSession.facil} fácil · ${fcSession.dificil} difícil · ${fcSession.errei} errei</span></div>`;
+    backEl.style.display='none';
+    hint.style.display='none';
+    actions.style.display='none';
+    return;
+  }
+  const card = fcDeck[fcIdx];
+  info.textContent = `Card ${fcIdx+1} de ${fcDeck.length} · ${projLabels[card.proj]||card.proj}`;
+  frontEl.textContent = card.front;
+  backEl.textContent = card.back;
+  backEl.style.display='none';
+  hint.style.display='block';
+  actions.style.display='none';
+  fcFlipped = false;
+  stats.textContent = fcSession.facil+fcSession.dificil+fcSession.errei > 0
+    ? `✓ ${fcSession.facil} fácil  ≈ ${fcSession.dificil} difícil  ✗ ${fcSession.errei} errei`
+    : '';
+}
+
+function flipCard(){
+  if(fcIdx >= fcDeck.length) return;
+  if(!fcFlipped){
+    document.getElementById('fc-back-txt').style.display='block';
+    document.getElementById('fc-hint').style.display='none';
+    document.getElementById('fc-actions').style.display='flex';
+    fcFlipped = true;
+  }
+}
+
+function rateCard(rate){
+  fcSession[rate]++;
+  const cards = akLoad(AK.fc);
+  const c = fcDeck[fcIdx];
+  const idx = cards.findIndex(x=>x.id===c.id);
+  if(idx>=0){ cards[idx].score = rate==='facil' ? (cards[idx].score||0)+1 : (rate==='errei' ? 0 : cards[idx].score); }
+  akSave(AK.fc, cards);
+  fcIdx++;
+  showCard();
+}
+
+function skipCard(){ fcIdx++; showCard(); }
+
+/* ── DÚVIDAS ── */
+function saveDv(){
+  const body = document.getElementById('dv-body').value.trim();
+  if(!body) return;
+  const proj = document.getElementById('dv-proj').value;
+  const items = akLoad(AK.dv);
+  items.unshift({id:Date.now(), body, proj, resolved:false,
+    date: new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'})});
+  akSave(AK.dv, items);
+  document.getElementById('dv-body').value='';
+  renderDv();
+}
+
+function toggleDv(id){
+  const items = akLoad(AK.dv).map(i=>i.id===id?{...i,resolved:!i.resolved}:i);
+  akSave(AK.dv, items);
+  renderDv();
+}
+
+function deleteDv(id){
+  akSave(AK.dv, akLoad(AK.dv).filter(i=>i.id!==id));
+  renderDv();
+}
+
+function renderDv(){
+  const items = akLoad(AK.dv);
+  const open = items.filter(i=>!i.resolved).length;
+  document.getElementById('dv-open-count').textContent = open;
+  const el = document.getElementById('dv-list');
+  if(!items.length){
+    el.innerHTML='<div style="font-family:\'IBM Plex Mono\',monospace;font-size:11px;color:var(--muted);text-align:center;padding:32px 0;opacity:.6">Nenhuma dúvida registrada</div>';
+    return;
+  }
+  el.innerHTML = items.map(i=>`
+    <div class="anki-dv-row">
+      <input type="checkbox" ${i.resolved?'checked':''}>
+      <div style="flex:1">
+        <div class="anki-dv-label ${i.resolved?'resolved':''}">${esc(i.body)}</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--muted);margin-top:4px">${projLabels[i.proj]||i.proj} · ${i.date||''}</div>
+      </div>
+      <button class="anki-del">✕</button>
+    </div>`).join('');
+}
+
+/* ── GLOSSÁRIO ── */
+function saveGls(){
+  const term = document.getElementById('gls-term').value.trim();
+  const def = document.getElementById('gls-def').value.trim();
+  if(!term||!def) return;
+  const items = akLoad(AK.gls);
+  items.unshift({id:Date.now(), term, def});
+  akSave(AK.gls, items);
+  document.getElementById('gls-term').value='';
+  document.getElementById('gls-def').value='';
+  renderGls();
+}
+
+function deleteGls(id){
+  akSave(AK.gls, akLoad(AK.gls).filter(i=>i.id!==id));
+  renderGls();
+}
+
+function renderGls(){
+  const items = akLoad(AK.gls);
+  document.getElementById('gls-count').textContent = items.length;
+  const el = document.getElementById('gls-list');
+  if(!items.length){
+    el.innerHTML='<div style="font-family:\'IBM Plex Mono\',monospace;font-size:11px;color:var(--muted);text-align:center;padding:32px 0;opacity:.6">Adicione termos conforme estudar</div>';
+    return;
+  }
+  el.innerHTML = items.map(i=>`
+    <div class="gls-row">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div class="gls-term">${esc(i.term)}</div>
+        <button class="anki-del">✕</button>
+      </div>
+      <div class="gls-def">${esc(i.def)}</div>
+    </div>`).join('');
+}
+
+function initAnki(){
+  const glsDefaults = [
+    {id:1,term:'KafkaTemplate',def:'Classe do Spring Kafka usada no Producer para publicar mensagens em um tópico. Ex: kafkaTemplate.send("topico", objeto)'},
+    {id:2,term:'@KafkaListener',def:'Anotação que marca um método como consumidor de um tópico Kafka. O método é chamado automaticamente quando uma mensagem chega.'},
+    {id:3,term:'@ControllerAdvice',def:'Intercepta exceções em qualquer Controller e permite retornar erros padronizados em JSON. Evita expor stack trace para o cliente.'},
+    {id:4,term:'Flyway',def:'Ferramenta de versionamento de banco. Executa arquivos SQL (V1__, V2__...) em ordem garantindo que o schema esteja sempre atualizado.'},
+    {id:5,term:'SecurityFilterChain',def:'Forma atual (Spring 6+) de configurar o Spring Security. Substitui o antigo WebSecurityConfigurerAdapter que foi removido.'},
+  ];
+  if(!akLoad(AK.gls).length){ akSave(AK.gls, glsDefaults); }
+
+  const fcDefaults = [
+    {id:1,front:'Qual a diferença entre @Component, @Service e @Repository?',back:'São sinônimos funcionalmente — todas registram um bean. Mas têm semântica diferente: @Service = regras de negócio, @Repository = acesso a dados (+ tratamento de exceções JPA), @Component = uso genérico.',proj:'proj1',score:0},
+    {id:2,front:'O que é um Consumer Group no Kafka?',back:'Grupo de consumers que dividem as partições de um tópico entre si. Garante que cada mensagem seja processada por apenas um consumer do grupo — útil para escalar o processamento.',proj:'proj2',score:0},
+    {id:3,front:'Qual o fluxo de um request com JWT no Spring Security?',back:'1. Request chega → JwtFilter intercepta\n2. Extrai o token do header Authorization\n3. Valida e extrai o usuário\n4. Seta o Authentication no SecurityContext\n5. Request passa para o Controller',proj:'proj1',score:0},
+  ];
+  if(!akLoad(AK.fc).length){ akSave(AK.fc, fcDefaults); }
+
+  renderNotas(); renderDv(); renderGls(); initDeck();
+}
+</script>
+</body>
+</html>
+
