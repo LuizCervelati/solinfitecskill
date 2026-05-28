@@ -1,4 +1,3 @@
-window.CRONOGRAMA_API_BASE_URL = "https://solinfitecskill.onrender.com"; // URL única da API
 function toggle(el){
   el.classList.toggle('open');
   updateAllProgress();
@@ -36,6 +35,7 @@ function saveState(){
 window.addEventListener('DOMContentLoaded',()=>{
   bindUIEvents();
   stripInlineHandlers();
+  initAuthUI();
   try{
     const saved = JSON.parse(localStorage.getItem('soli-v2')||'{}');
     document.querySelectorAll('.checklist li').forEach((li,i)=>{
@@ -89,6 +89,10 @@ function bindUIEvents(){
     if(actionType === 'toggle-dv') toggleDv(Number(action.dataset.id));
     if(actionType === 'delete-dv') deleteDv(Number(action.dataset.id));
     if(actionType === 'delete-gls') deleteGls(Number(action.dataset.id));
+    if(actionType === 'auth-login') login();
+    if(actionType === 'auth-register') register();
+    if(actionType === 'auth-logout') logout();
+    if(actionType === 'project-type-create') createProjectType();
   });
 }
 
@@ -105,6 +109,206 @@ function apiBaseUrl(){
 
 function getAuthToken(){
   return String(localStorage.getItem("cronograma-auth-token") || "").trim();
+}
+
+function setAuthToken(token){
+  if(token) localStorage.setItem("cronograma-auth-token", token);
+}
+
+function clearAuthToken(){
+  localStorage.removeItem("cronograma-auth-token");
+}
+
+function authHeaders(extra = {}){
+  const token = getAuthToken();
+  return token ? { ...extra, Authorization: `Bearer ${token}` } : extra;
+}
+
+let currentUser = null;
+let projectTypes = [
+  { nome: "Geral", slug: "geral" },
+  { nome: "Projeto 01", slug: "proj1" },
+  { nome: "Projeto 02", slug: "proj2" },
+  { nome: "Projeto 03", slug: "proj3" },
+];
+
+function setAuthUIState(logged){
+  const guest = document.getElementById("auth-guest");
+  const user = document.getElementById("auth-user");
+  if(!guest || !user) return;
+  guest.style.display = logged ? "none" : "grid";
+  user.style.display = logged ? "flex" : "none";
+  const nameEl = document.getElementById("auth-user-name");
+  if(nameEl) nameEl.textContent = logged && currentUser ? `${currentUser.nome} (${currentUser.email})` : "";
+}
+
+function showAuthStatus(message, isError=false){
+  const el = document.getElementById("auth-status");
+  if(!el) return;
+  el.textContent = message;
+  el.style.color = isError ? "var(--red)" : "var(--green)";
+  el.style.opacity = "1";
+  setTimeout(()=>{ el.style.opacity = "0"; }, 2600);
+}
+
+async function initAuthUI(){
+  const token = getAuthToken();
+  if(!token){
+    setAuthUIState(false);
+    populateProjectSelects(projectTypes);
+    return;
+  }
+  try{
+    const base = apiBaseUrl();
+    const res = await fetch(`${base}/api/auth/me`, { headers: authHeaders() });
+    if(!res.ok) throw new Error("Sessao invalida");
+    currentUser = await res.json();
+    setAuthUIState(true);
+    await loadProjectTypes();
+  }catch(_err){
+    clearAuthToken();
+    setAuthUIState(false);
+    populateProjectSelects(projectTypes);
+  }
+}
+
+async function register(){
+  const base = apiBaseUrl();
+  const nome = String(document.getElementById("auth-reg-name")?.value || "").trim();
+  const email = String(document.getElementById("auth-reg-email")?.value || "").trim().toLowerCase();
+  const password = String(document.getElementById("auth-reg-pass")?.value || "");
+  if(!nome || !email || !password) return showAuthStatus("Preencha nome, email e senha", true);
+  try{
+    const res = await fetch(`${base}/api/auth/register`, {
+      method: "POST",
+      headers: { "Content-Type":"application/json" },
+      body: JSON.stringify({ nome, email, password }),
+    });
+    const data = await res.json();
+    if(!res.ok) return showAuthStatus(data.error || "Falha no cadastro", true);
+    setAuthToken(data.token);
+    currentUser = data.user;
+    setAuthUIState(true);
+    showAuthStatus("Conta criada com sucesso");
+    await loadProjectTypes();
+    await loadChecklistFromApi();
+    await loadNotas();
+  }catch(_err){
+    showAuthStatus("Erro de conexao", true);
+  }
+}
+
+async function login(){
+  const base = apiBaseUrl();
+  const email = String(document.getElementById("auth-login-email")?.value || "").trim().toLowerCase();
+  const password = String(document.getElementById("auth-login-pass")?.value || "");
+  if(!email || !password) return showAuthStatus("Informe email e senha", true);
+  try{
+    const res = await fetch(`${base}/api/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type":"application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+    const data = await res.json();
+    if(!res.ok) return showAuthStatus(data.error || "Falha no login", true);
+    setAuthToken(data.token);
+    currentUser = data.user;
+    setAuthUIState(true);
+    showAuthStatus("Login realizado");
+    await loadProjectTypes();
+    await loadChecklistFromApi();
+    await loadNotas();
+  }catch(_err){
+    showAuthStatus("Erro de conexao", true);
+  }
+}
+
+function logout(){
+  clearAuthToken();
+  currentUser = null;
+  setAuthUIState(false);
+  showAuthStatus("Sessao finalizada");
+  loadNotas();
+}
+
+function slugify(value){
+  return String(value || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 40);
+}
+
+async function loadProjectTypes(){
+  const base = apiBaseUrl();
+  if(!getAuthToken() || !base){
+    populateProjectSelects(projectTypes);
+    return;
+  }
+  try{
+    const res = await fetch(`${base}/api/project-types`, { headers: authHeaders() });
+    if(!res.ok) throw new Error("Falha ao carregar projetos");
+    const data = await res.json();
+    if(Array.isArray(data) && data.length){
+      projectTypes = data.map((p)=>({ nome: p.nome, slug: p.slug }));
+    }
+    populateProjectSelects(projectTypes);
+  }catch(_err){
+    populateProjectSelects(projectTypes);
+  }
+}
+
+function populateProjectSelects(items){
+  projLabels = items.reduce((acc, p)=>({ ...acc, [p.slug]: p.nome }), {});
+  const selects = ["an-proj","fc-proj","dv-proj"].map((id)=>document.getElementById(id)).filter(Boolean);
+  const html = items.map((p)=>`<option value="${esc(p.slug)}">${esc(p.nome)}</option>`).join("");
+  selects.forEach((select)=>{
+    const current = select.value || "geral";
+    select.innerHTML = html;
+    select.value = items.some((p)=>p.slug===current) ? current : (items[0]?.slug || "");
+  });
+}
+
+async function createProjectType(){
+  const base = apiBaseUrl();
+  const nameInput = document.getElementById("project-type-name");
+  const slugInput = document.getElementById("project-type-slug");
+  const descInput = document.getElementById("project-type-desc");
+  const status = document.getElementById("project-type-status");
+  if(!nameInput || !slugInput || !descInput || !status) return;
+
+  const nome = nameInput.value.trim();
+  const slug = slugify(slugInput.value || nome);
+  const descricao = descInput.value.trim();
+  if(!nome || !slug){
+    status.textContent = "Informe nome e slug valido";
+    status.style.color = "var(--red)";
+    return;
+  }
+  try{
+    const res = await fetch(`${base}/api/project-types`, {
+      method: "POST",
+      headers: authHeaders({ "Content-Type":"application/json" }),
+      body: JSON.stringify({ nome, slug, descricao }),
+    });
+    const data = await res.json();
+    if(!res.ok){
+      status.textContent = data.error || "Falha ao criar tipo";
+      status.style.color = "var(--red)";
+      return;
+    }
+    status.textContent = "Tipo criado com sucesso";
+    status.style.color = "var(--green)";
+    nameInput.value = "";
+    slugInput.value = "";
+    descInput.value = "";
+    await loadProjectTypes();
+  }catch(_err){
+    status.textContent = "Erro de conexao";
+    status.style.color = "var(--red)";
+  }
 }
 
 function applyChecklistState(state){
@@ -164,7 +368,7 @@ const AK = {
   dv: 'soli-anki-dv',
   gls: 'soli-anki-gls'
 };
-const projLabels = {geral:'Geral',proj1:'Proj 01',proj2:'Proj 02',proj3:'Proj 03'};
+let projLabels = {geral:'Geral',proj1:'Proj 01',proj2:'Proj 02',proj3:'Proj 03'};
 const tagEmoji = {descoberta:'💡',importante:'⚠',revisao:'🔁',erro:'🐛'};
 
 function akLoad(k){ try{return JSON.parse(localStorage.getItem(k)||'[]')}catch(e){return []} }
@@ -180,31 +384,52 @@ function ankiTab(btn, tab){
 }
 
 /* ── ANOTAÇÕES ── */
-function saveAnota(){
+async function saveAnota(){
   const title = document.getElementById('an-title').value.trim();
   const body = document.getElementById('an-body').value.trim();
   if(!body) return;
   const tag = document.getElementById('an-tag').value;
   const proj = document.getElementById('an-proj').value;
-  const notas = akLoad(AK.notas);
-  notas.unshift({id:Date.now(), title, body, tag, proj,
-    date: new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})});
-  akSave(AK.notas, notas);
+  const base = apiBaseUrl();
+  const token = getAuthToken();
+  if(base && token){
+    const res = await fetch(`${base}/api/notas`, {
+      method: "POST",
+      headers: authHeaders({ "Content-Type":"application/json" }),
+      body: JSON.stringify({ titulo: title, conteudo: body, tag, projeto: proj }),
+    });
+    if(!res.ok){
+      showAuthStatus("Falha ao salvar na API", true);
+      return;
+    }
+  }else{
+    const notas = akLoad(AK.notas);
+    notas.unshift({id:Date.now(), title, body, tag, proj,
+      date: new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})});
+    akSave(AK.notas, notas);
+  }
   document.getElementById('an-title').value='';
   document.getElementById('an-body').value='';
   const s = document.getElementById('an-status');
   s.style.opacity='1'; s.textContent='✓ Salvo!';
   setTimeout(()=>s.style.opacity='0', 1800);
-  renderNotas();
+  await loadNotas();
 }
 
-function deleteAnota(id){
-  akSave(AK.notas, akLoad(AK.notas).filter(n=>n.id!==id));
-  renderNotas();
+async function deleteAnota(id){
+  const base = apiBaseUrl();
+  const token = getAuthToken();
+  if(base && token){
+    await fetch(`${base}/api/notas/${id}`, { method: "DELETE", headers: authHeaders() });
+  }else{
+    akSave(AK.notas, akLoad(AK.notas).filter(n=>n.id!==id));
+  }
+  await loadNotas();
 }
 
+let notasCache = [];
 function renderNotas(){
-  const notas = akLoad(AK.notas);
+  const notas = notasCache;
   document.getElementById('an-count').textContent = notas.length;
   const el = document.getElementById('an-list');
   if(!notas.length){
@@ -220,10 +445,37 @@ function renderNotas(){
       ${n.title ? `<div class="ac-body">${esc(n.body)}</div>` : ''}
       <div class="ac-meta">
         <span class="anki-badge ${n.tag}">${tagEmoji[n.tag]||''} ${n.tag}</span>
-        <span class="anki-badge proj">${projLabels[n.proj]||n.proj}</span>
+        <span class="anki-badge proj">${projLabels[n.proj || n.projeto_slug] || n.proj || n.projeto_slug}</span>
         <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--muted);margin-left:auto">${n.date||''}</span>
       </div>
     </div>`).join('');
+}
+
+async function loadNotas(){
+  const base = apiBaseUrl();
+  const token = getAuthToken();
+  if(base && token){
+    try{
+      const res = await fetch(`${base}/api/notas`, { headers: authHeaders() });
+      if(res.ok){
+        const data = await res.json();
+        notasCache = (Array.isArray(data) ? data : []).map((n)=>({
+          ...n,
+          title: n.titulo || "",
+          body: n.conteudo || "",
+          proj: n.projeto_slug || "geral",
+          date: n.created_at ? new Date(n.created_at).toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}) : "",
+        }));
+      }else{
+        notasCache = [];
+      }
+    }catch(_err){
+      notasCache = [];
+    }
+  }else{
+    notasCache = akLoad(AK.notas);
+  }
+  renderNotas();
 }
 
 /* ── FLASHCARDS ── */
@@ -390,6 +642,7 @@ function renderGls(){
 }
 
 function initAnki(){
+  projLabels = projectTypes.reduce((acc, p)=>({ ...acc, [p.slug]: p.nome }), {});
   const glsDefaults = [
     {id:1,term:'KafkaTemplate',def:'Classe do Spring Kafka usada no Producer para publicar mensagens em um tópico. Ex: kafkaTemplate.send("topico", objeto)'},
     {id:2,term:'@KafkaListener',def:'Anotação que marca um método como consumidor de um tópico Kafka. O método é chamado automaticamente quando uma mensagem chega.'},
@@ -406,10 +659,7 @@ function initAnki(){
   ];
   if(!akLoad(AK.fc).length){ akSave(AK.fc, fcDefaults); }
 
-  renderNotas(); renderDv(); renderGls(); initDeck();
+  loadNotas();
+  renderDv(); renderGls(); initDeck();
 }
 
-function handleLogout() {
-  localStorage.removeItem("cronograma-auth-token");
-  window.location.reload();
-}

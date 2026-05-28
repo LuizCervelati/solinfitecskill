@@ -382,6 +382,43 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;justify
   <a href="#proj3" class="nav-pill p3">03 · Dashboard Agro IoT</a>
   <a href="#anotacoes" class="nav-pill" style="color:var(--muted)">✏ Anotações</a>
 </nav>
+<section class="auth-panel">
+  <div id="auth-guest" class="auth-grid">
+    <div class="auth-card">
+      <div class="auth-title">Entrar</div>
+      <input id="auth-login-email" class="anki-input" placeholder="Email">
+      <input id="auth-login-pass" class="anki-input" type="password" placeholder="Senha">
+      <button class="anki-btn-primary" data-action="auth-login">Entrar</button>
+    </div>
+    <div class="auth-card">
+      <div class="auth-title">Criar conta</div>
+      <input id="auth-reg-name" class="anki-input" placeholder="Nome">
+      <input id="auth-reg-email" class="anki-input" placeholder="Email">
+      <input id="auth-reg-pass" class="anki-input" type="password" placeholder="Senha forte (8+)">
+      <button class="anki-btn-primary" data-action="auth-register">Cadastrar</button>
+    </div>
+  </div>
+  <div id="auth-user" class="auth-user" style="display:none">
+    <div class="auth-user-line">
+      <span class="auth-title">Conectado:</span>
+      <span id="auth-user-name" class="auth-user-name"></span>
+      <button class="anki-btn-muted" data-action="auth-logout">Sair</button>
+    </div>
+    <div class="auth-project-create">
+      <div class="auth-title">Criar novo tipo de projeto</div>
+      <div class="auth-project-grid">
+        <input id="project-type-name" class="anki-input" placeholder="Nome (ex: Projeto 04)">
+        <input id="project-type-slug" class="anki-input" placeholder="Slug (ex: proj4)">
+      </div>
+      <textarea id="project-type-desc" class="anki-textarea" style="min-height:80px" placeholder="Descrição curta do tipo de projeto"></textarea>
+      <div style="display:flex;align-items:center;gap:10px">
+        <button class="anki-btn-primary" data-action="project-type-create">Criar tipo</button>
+        <span id="project-type-status" class="auth-status-inline"></span>
+      </div>
+    </div>
+  </div>
+  <div id="auth-status" class="auth-status"></div>
+</section>
 <main id="conteudo-principal">
 
 <section class="overview">
