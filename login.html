@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entrar · Cronograma Solinfitec</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body data-page="login" class="auth-page-body">
+  <main class="auth-page">
+    <div class="auth-page-card">
+      <h1 class="auth-page-title">Acessar Cronograma</h1>
+      <p class="auth-page-subtitle">Entre com sua conta para continuar seus estudos.</p>
+
+      <form id="auth-form" class="auth-page-form">
+        <label class="auth-page-label" for="auth-email">E-mail</label>
+        <input id="auth-email" class="anki-input" type="email" autocomplete="email" placeholder="seu@email.com" required>
+
+        <label class="auth-page-label" for="auth-password">Senha</label>
+        <input id="auth-password" class="anki-input" type="password" autocomplete="current-password" placeholder="Sua senha" required>
+
+        <button id="auth-submit-btn" class="anki-btn-primary auth-page-submit" type="submit">Entrar</button>
+      </form>
+
+      <p id="auth-message" class="auth-page-message" style="display:none"></p>
+
+      <p class="auth-page-footer">
+        Nao tem conta?
+        <a href="cadastro.html">Cadastre-se</a>
+      </p>
+    </div>
+  </main>
+
+  <script src="./assets/js/config.js"></script>
+  <script src="./assets/js/auth.js"></script>
+</body>
+</html>

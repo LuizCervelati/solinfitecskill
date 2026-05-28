@@ -89,8 +89,6 @@ function bindUIEvents(){
     if(actionType === 'toggle-dv') toggleDv(Number(action.dataset.id));
     if(actionType === 'delete-dv') deleteDv(Number(action.dataset.id));
     if(actionType === 'delete-gls') deleteGls(Number(action.dataset.id));
-    if(actionType === 'auth-login') login();
-    if(actionType === 'auth-register') register();
     if(actionType === 'auth-logout') logout();
     if(actionType === 'project-type-create') createProjectType();
   });
@@ -133,10 +131,8 @@ let projectTypes = [
 ];
 
 function setAuthUIState(logged){
-  const guest = document.getElementById("auth-guest");
   const user = document.getElementById("auth-user");
-  if(!guest || !user) return;
-  guest.style.display = logged ? "none" : "grid";
+  if(!user) return;
   user.style.display = logged ? "flex" : "none";
   const nameEl = document.getElementById("auth-user-name");
   if(nameEl) nameEl.textContent = logged && currentUser ? `${currentUser.nome} (${currentUser.email})` : "";
@@ -154,8 +150,7 @@ function showAuthStatus(message, isError=false){
 async function initAuthUI(){
   const token = getAuthToken();
   if(!token){
-    setAuthUIState(false);
-    populateProjectSelects(projectTypes);
+    window.location.href = "login.html";
     return;
   }
   try{
@@ -167,68 +162,14 @@ async function initAuthUI(){
     await loadProjectTypes();
   }catch(_err){
     clearAuthToken();
-    setAuthUIState(false);
-    populateProjectSelects(projectTypes);
-  }
-}
-
-async function register(){
-  const base = apiBaseUrl();
-  const nome = String(document.getElementById("auth-reg-name")?.value || "").trim();
-  const email = String(document.getElementById("auth-reg-email")?.value || "").trim().toLowerCase();
-  const password = String(document.getElementById("auth-reg-pass")?.value || "");
-  if(!nome || !email || !password) return showAuthStatus("Preencha nome, email e senha", true);
-  try{
-    const res = await fetch(`${base}/api/auth/register`, {
-      method: "POST",
-      headers: { "Content-Type":"application/json" },
-      body: JSON.stringify({ nome, email, password }),
-    });
-    const data = await res.json();
-    if(!res.ok) return showAuthStatus(data.error || "Falha no cadastro", true);
-    setAuthToken(data.token);
-    currentUser = data.user;
-    setAuthUIState(true);
-    showAuthStatus("Conta criada com sucesso");
-    await loadProjectTypes();
-    await loadChecklistFromApi();
-    await loadNotas();
-  }catch(_err){
-    showAuthStatus("Erro de conexao", true);
-  }
-}
-
-async function login(){
-  const base = apiBaseUrl();
-  const email = String(document.getElementById("auth-login-email")?.value || "").trim().toLowerCase();
-  const password = String(document.getElementById("auth-login-pass")?.value || "");
-  if(!email || !password) return showAuthStatus("Informe email e senha", true);
-  try{
-    const res = await fetch(`${base}/api/auth/login`, {
-      method: "POST",
-      headers: { "Content-Type":"application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-    const data = await res.json();
-    if(!res.ok) return showAuthStatus(data.error || "Falha no login", true);
-    setAuthToken(data.token);
-    currentUser = data.user;
-    setAuthUIState(true);
-    showAuthStatus("Login realizado");
-    await loadProjectTypes();
-    await loadChecklistFromApi();
-    await loadNotas();
-  }catch(_err){
-    showAuthStatus("Erro de conexao", true);
+    window.location.href = "login.html";
   }
 }
 
 function logout(){
   clearAuthToken();
   currentUser = null;
-  setAuthUIState(false);
-  showAuthStatus("Sessao finalizada");
-  loadNotas();
+  window.location.href = "login.html";
 }
 
 function slugify(value){

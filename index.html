@@ -261,23 +261,8 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;justify
   <a href="#proj3" class="nav-pill p3">03 · Dashboard Agro IoT</a>
   <a href="#anotacoes" class="nav-pill" style="color:var(--muted)">✏ Anotações</a>
 </nav>
-<section class="auth-panel">
-  <div id="auth-guest" class="auth-grid">
-    <div class="auth-card">
-      <div class="auth-title">Entrar</div>
-      <input id="auth-login-email" class="anki-input" placeholder="Email">
-      <input id="auth-login-pass" class="anki-input" type="password" placeholder="Senha">
-      <button class="anki-btn-primary" data-action="auth-login">Entrar</button>
-    </div>
-    <div class="auth-card">
-      <div class="auth-title">Criar conta</div>
-      <input id="auth-reg-name" class="anki-input" placeholder="Nome">
-      <input id="auth-reg-email" class="anki-input" placeholder="Email">
-      <input id="auth-reg-pass" class="anki-input" type="password" placeholder="Senha forte (8+)">
-      <button class="anki-btn-primary" data-action="auth-register">Cadastrar</button>
-    </div>
-  </div>
-  <div id="auth-user" class="auth-user" style="display:none">
+<section class="auth-panel" id="auth-toolbar">
+  <div id="auth-user" class="auth-user">
     <div class="auth-user-line">
       <span class="auth-title">Conectado:</span>
       <span id="auth-user-name" class="auth-user-name"></span>
@@ -1730,9 +1715,7 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;justify
   <div class="footer-txt">Clique nas etapas · Marque as tarefas · Progresso salvo automaticamente</div>
 </footer>
 
-<script>
-  window.CRONOGRAMA_API_BASE_URL = "https://solinfitecskill.onrender.com";
-</script>
+<script src="./assets/js/config.js"></script>
 <script src="./assets/js/app.js" defer></script>
 <script type="application/json">
 function toggle(el){

@@ -42,6 +42,20 @@ h1 span{color:var(--green)}
 .auth-status{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--green);opacity:0;transition:opacity .2s}
 .auth-status-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted)}
 
+/* AUTH PAGES */
+.auth-page-body{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.auth-page{width:100%;max-width:420px}
+.auth-page-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:32px 28px;box-shadow:0 12px 40px rgba(0,0,0,.35)}
+.auth-page-title{font-size:clamp(22px,4vw,28px);font-weight:800;text-align:center;color:var(--green);margin-bottom:8px;letter-spacing:-.5px}
+.auth-page-subtitle{font-size:13px;color:var(--muted);text-align:center;margin-bottom:24px;line-height:1.5}
+.auth-page-form{display:flex;flex-direction:column;gap:8px}
+.auth-page-label{font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-top:6px}
+.auth-page-submit{margin-top:12px;width:100%;padding:11px 16px;font-size:14px}
+.auth-page-message{font-family:'IBM Plex Mono',monospace;font-size:11px;text-align:center;margin-top:12px}
+.auth-page-footer{margin-top:20px;text-align:center;font-size:13px;color:var(--muted)}
+.auth-page-footer a{color:var(--green);text-decoration:none}
+.auth-page-footer a:hover{text-decoration:underline}
+
 /* OVERVIEW */
 .overview{padding:48px 48px 32px}
 .section-title{font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:20px}
